@@ -10,8 +10,6 @@
     <link rel="stylesheet" href="/styles/base.css">
     <link rel="stylesheet" href="/styles/layout.css">
     <link rel="stylesheet" href="/styles/modules.css">
-
-    <link rel="stylesheet" href="styles/reset.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <script id="entry-template" type="text/x-handlebars-template">
       <h1>Roster Setup </h1>
@@ -32,6 +30,28 @@
       </select>
     </div>
       {{/each}}
+    </script>
+
+    <script id="draft-template" type="text/x-handlebars-template">
+      <article>
+        <h6>{{Player Name}}</h6>
+        <p></p>
+      </article>
+        <h6>{{Team}}</h6>
+        <p></p>
+      <article>
+        <h6>{{Position}}</h6>
+        <p></p>
+      </article>
+      <article>
+        <h6>{{ADP}}</h6>
+        <p></p>
+      </article>
+      <article>
+        <h6>{{BYE}}</h6>
+        <p></p>
+      </article>
+      <button type="button" onclick="draft()" id="draftPlayer">Draft</button>
     </script>
 
     <!-- Put third-party script links here (jQuery etc) -->
