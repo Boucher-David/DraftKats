@@ -10,8 +10,6 @@
     <link rel="stylesheet" href="/styles/base.css">
     <link rel="stylesheet" href="/styles/layout.css">
     <link rel="stylesheet" href="/styles/modules.css">
-
-    <link rel="stylesheet" href="styles/reset.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <script id="entry-template" type="text/x-handlebars-template">
       <h1>Roster Setup </h1>
@@ -94,11 +92,12 @@
                       <option value="15">15th</option>
                       <option value="16">16th</option>
                     </select>
-                    <button type="button" onclick="randomizeOrder()" class="btn btn-select">Randomize</button>
+
+                    <button id="random-btn" type="button">Randomize</button>
                   </span>
                   <span class="roster-position" title="Roster Position">
                   </span>
-                  <button type="button" onclick="startDraft()" class="btn btn-select">Start Draft!</button>
+                  <button type="button"><a href='/draft'>Start Draft!</a></button>
 
               </div>
             </section>
