@@ -1,4 +1,5 @@
 
+
 .main-nav {
   padding: 0.1em;
 }
@@ -47,3 +48,8 @@
   .main-nav ul li:mouseover a {
     color: #29506D;
   }
+  
+.select-dropdown {
+  position: relative;
+  display: inline-block;
+}

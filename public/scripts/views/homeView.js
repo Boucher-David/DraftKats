@@ -4,5 +4,16 @@ var app = app || {};
 
 (function(module) {
 
+  $('.dropdown').change(function( event ) {
+    event.preventDefault();
+    // val is select, it hide it, if not show it
+    
+    if ($( 'select#dropdown').val() === "select-sport") {
+      $('.draft-config').hide();  
+    } else {
+      $('.draft-config').show();
+    }
+  });
+
   module.homeView = homeView;
 })(app);
