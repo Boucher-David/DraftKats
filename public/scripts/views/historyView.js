@@ -3,6 +3,7 @@
 var app = app || {};
 
 (function(module) {
-let historyView = [];
+  let historyView = [];
+
   module.historyView = historyView;
 })(app);

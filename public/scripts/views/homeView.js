@@ -3,7 +3,7 @@
 var app = app || {};
 
 (function(module) {
-  let homeView = [];
+let homeView = [];
 
   $('.dropdown').change(function( event ) {
     event.preventDefault();
@@ -16,7 +16,13 @@ var app = app || {};
     }
   });
 
-
+  $('#random-btn').click(function ( event ){
+    event.preventDefault();
+        var options = $('#userPos').children('option');
+        var random = Math.floor(options.length * (Math.random() % 1));
+        options.attr('selected', false).eq(random).attr('selected', true);
+        console.log(options);
+  });
 
   module.homeView = homeView;
 })(app);

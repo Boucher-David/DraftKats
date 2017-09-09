@@ -6,8 +6,7 @@ var app = app || {};
   const historyController = {};
 
   historyController.index = () => {
-    $('.content').children().hide();
-    $('#content-history').show();
-  };
+    $('#content-history').show().siblings().hide();
+    };
   module.historyController = historyController;
 })(app);
