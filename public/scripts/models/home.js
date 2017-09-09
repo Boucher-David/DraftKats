@@ -24,12 +24,12 @@ var app = app || {};
   };
 
   module.home.setConfig = function() {
-    module.config.selected = $('').find(':selected').text();
-    module.config.teams = $('').find(':selected').text();
-    module.config.position = $('').find(':selected').text();
+    module.config.selected = $('#dropdown').find(':selected').text();
+    module.config.teams = $('#teamCount').find(':selected').text();
+    module.config.position = $('#userPos').find(':selected').text();
 
     // need clever way of setting the roster options based on
-    module.config.roster[module.config.selected] = blah;
+    // module.config.roster[module.config.selected] = blah;
 
     // save to local storage when complete
     module.home.saveConfig();
