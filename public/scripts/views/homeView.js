@@ -6,12 +6,13 @@ var app = app || {};
 
   $('.dropdown').click(function( event ) {
     event.preventDefault();
-    var sport = $( 'select#dropdown').val();
     // val is select, it hide it, if not show it
-    if (sport == '#draft-configure')
-      $('#draft-configure').show(IDK);
-    else
-      $('#draft-configure').hide(IDK);
+    
+    if ($( 'select#dropdown').val() === "select-sport") {
+      $('.draft-configure').hide();  
+    } else {
+      $('.draft-configure').show();
+    }
   });
 
   module.homeView = homeView;
