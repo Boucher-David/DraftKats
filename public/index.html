@@ -3,11 +3,16 @@
   <head>
     <meta charset="utf-8">
     <title>Draft Kats</title>
+    <script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
+    <meta name = "viewport" content = "width = device-width, initial-scale =1" />
 
     <link rel="stylesheet" href="/styles/reset.css">
     <link rel="stylesheet" href="/styles/base.css">
     <link rel="stylesheet" href="/styles/layout.css">
     <link rel="stylesheet" href="/styles/modules.css">
+
+    <link rel="stylesheet" href="styles/reset.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <script id="entry-template" type="text/x-handlebars-template">
       <h1>Roster Setup </h1>
       {{#each roster}}
@@ -32,10 +37,15 @@
     <!-- Put third-party script links here (jQuery etc) -->
   </head>
   <body>
-    <div id="nav-bar"></div>
+    <nav class="main-nav">
+      <ul>
+        <li id="home"><a href="/">Home</a></li>
+        <li id="history"><a href="/history">History</a></li>
+      </ul>
+    </nav>
 
     <div id="main">
-        <section class="home">
+        <section id="content-home" class="home">
           <!--Sports Selection Dropdown 06-->
           <span class = "select-dropdown">
             <header>Select Sport:
@@ -92,8 +102,8 @@
 
               </div>
             </section>
-        <section class="draft"></section>
-        <section class="history"></section>
+        <section id="content-draft" class="draft"></section>
+        <section id="content-history" class="history"></section>
     </div>
 
 
@@ -110,7 +120,7 @@
     <script type="text/javascript" src="/scripts/models/history.js"></script>
     <script type="text/javascript" src="/scripts/views/historyView.js"></script>
     <script type="text/javascript" src="/scripts/controllers/historyController.js"></script>
-
+    <script src="https://cdn.rawgit.com/visionmedia/page.js/master/page.js"></script>
     <script type="text/javascript" src="/scripts/controllers/routes.js"></script>
 
   </body>
