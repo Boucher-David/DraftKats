@@ -13,22 +13,23 @@
 
     <link rel="stylesheet" href="styles/reset.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-    <script id="entry-template" type="text/x-handlebars-template">
+
+    <script id="roster-template" type="text/x-handlebars-template">
       <h1>Roster Setup </h1>
-      {{#each roster}}
+      {{#each this}}
       <div>
       <p>{{this.position}}</p>
-      <select class="position">
-        <option value="1">1st</option>
-        <option value="2">2nd</option>
-        <option value="3">3rd</option>
-        <option value="4">4th</option>
-        <option value="5">5th</option>
-        <option value="6">6th</option>
-        <option value="7">7th</option>
-        <option value="8">8th</option>
-        <option value="9">9th</option>
-        <option value="10">10th</option>
+      <select class="position" id="{{this.position}}">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
       </select>
     </div>
       {{/each}}
