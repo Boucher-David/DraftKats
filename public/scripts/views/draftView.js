@@ -9,7 +9,7 @@ var app = app || {};
     let $draft = $('#content-draft');
   };
 
-  const render = handlebars.compile($('#draft-template').text());
+  // const render = handlebars.compile($('#draft-template').text());
 
 draftView.index = function() {
   ui();
