@@ -33,6 +33,31 @@
       {{/each}}
     </script>
 
+    <script id="draft-template" type="text/x-handlebars-template">
+      <article>
+        <h6>Player Name</h6>
+        <p></p>
+      </article>
+      <article>
+        <h6>Team</h6>
+        <p></p>
+      </article>
+      <article>
+        <h6>Position</h6>
+        <p></p>
+      </article>
+      <article>
+        <h6>ADP</h6>
+        <p></p>
+      </article>
+      <article>
+        <h6>BYE</h6>
+        <p></p>
+      </article>
+      <button type="button" onclick="draft()" id="draftPlayer">Draft</button>
+      <br />
+    </script>
+
     <!-- Put third-party script links here (jQuery etc) -->
   </head>
   <body>
@@ -102,7 +127,22 @@
 
               </div>
             </section>
-        <section id="content-draft" class="draft"></section>
+        <section id="content-draft" class="draft">
+          <nav id="draft-nav" class="main-nav">
+            <ul>
+              <li id="draft">Draft</li>
+              <li id="teams">Teams</li>
+            </ul>
+          </nav>
+          <div class="draft-tab">
+            <p>This is the draft page</p>
+          </div>
+
+          <div class="teams-tab">
+            <p>This will show the team information.</p>
+          </div>
+
+        </section>
         <section id="content-history" class="history"></section>
     </div>
 
