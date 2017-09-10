@@ -4,6 +4,12 @@ var app = app || {};
 
 (function(module) {
 
+  //api request
+
+  $.get('/api', function(response){
+    console.log(response);
+  });
+
   // delete afterwards
   app.config = {
     playerData: [],
