@@ -3,7 +3,6 @@
 var app = app || {};
 
 (function(module) {
-  let draftView = [];
 
   const ui = function() {
     let $draft = $('#content-draft');

@@ -9,7 +9,7 @@ let homeView = [];
     event.preventDefault();
     // val is select, it hide it, if not show it
 
-    if ($( 'select#dropdown').val() === "select-sport") {
+    if ($('select#dropdown').val() === "select-sport") {
       $('.draft-config').hide();
     } else {
       $('.draft-config').show();
