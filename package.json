@@ -19,6 +19,8 @@
   "homepage": "https://github.com/Boucher-David/DraftKats#readme",
   "dependencies": {
     "express": "^4.15.4",
-    "page": "^1.7.1"
+    "express-request-proxy": "^2.0.0",
+    "page": "^1.7.1",
+    "request": "^2.81.0"
   }
 }

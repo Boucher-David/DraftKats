@@ -1,10 +1,15 @@
 'use strict';
 
 const express = require('express');
-const PORT = process.env.PORT || 5000;
 const app = express();
-// const conString = 'postgres://localhost:5432/DATABASE';
+
+const requestProxy = require('express-request-proxy')
+
 app.use(express.static('./public'));
-app.listen(PORT, function(){
+app.listen(process.env.PORT || 5000, function(){
   console.log('surfs up!');
 });
+
+app.get('/api', requestProxy({
+  url: "https://draft.premierleague.com/api/bootstrap-static"
+}));
