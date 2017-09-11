@@ -33,7 +33,9 @@ var app = app || {};
 
   //app.config.roster
   let populateRoster = function() {
-    var source   = $("#roster-template").html();
+    var source   = $.get(`scripts/roster.hbs`, (template) => {
+      return template;
+    });
     var template = Handlebars.compile(source);
     var rosterTemplate = template(app.config.roster[app.config.selected]);
 

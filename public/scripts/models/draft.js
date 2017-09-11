@@ -4,7 +4,11 @@ var app = app || {};
 
 (function(module) {
   let populateDraft = function() {
-    var source   = $("#draft-template").html();
+    // var source   = $.get(`scripts/draft.hbs`, (template) => {
+    //   return template;
+    // });
+    var source   = $.get(`scripts/draft.hbs`);
+    console.log('draft source ' + source);
     var template = Handlebars.compile(source);
 
     for (var i = 0; i < 10; i++) {

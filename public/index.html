@@ -11,60 +11,10 @@
     <link rel="stylesheet" href="/styles/modules.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 
-    <script id="roster-template" type="text/x-handlebars-template">
-      <h1>Roster Setup </h1>
-      {{#each this}}
-      <div>
-      <p>{{this.position}}</p>
-      <select class="position" id="{{this.position}}">
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-        <option value="6">6</option>
-        <option value="7">7</option>
-        <option value="8">8</option
-        <option value="9">9</option>
-        <option value="10">10</option>
-      </select>
-    </div>
-      {{/each}}
-    </script>
-
-    <script id="draft-template" type="text/x-handlebars-template">
-      <article>
-        <h6>Player Name</h6>
-        <p></p>
-      </article>
-      <article>
-        <h6>Team</h6>
-        <p></p>
-      </article>
-      <article>
-        <h6>Position</h6>
-        <p></p>
-      </article>
-      <article>
-        <h6>ADP</h6>
-        <p></p>
-      </article>
-      <article>
-        <h6>BYE</h6>
-        <p></p>
-      </article>
-      <button type="button" onclick="draft()" id="draftPlayer">Draft</button>
-      <br />
-    </script>
-
     <!-- Put third-party script links here (jQuery etc) -->
     <script src="/jquery/jquery.js"></script>
     <script src="/handlebars/handlebars.js"></script>
-<<<<<<< HEAD
     <script src="/page/page.js"></script>
-=======
-    <script src="/page/page"></script>
->>>>>>> 254d706cb88da44673d3c79eb4b430175030c3db
 
   </head>
   <body>
@@ -152,7 +102,8 @@
         </section>
         <section id="content-history" class="history"></section>
     </div>
-
+    <script type="text/javascript" src="/scripts/draft.hbs"></script>
+    <script type="text/javascript" src="/scripts/roster.hbs"></script>
     <script type="text/javascript" src="/scripts/models/home.js"></script>
     <script type="text/javascript" src="/scripts/views/homeView.js"></script>
     <script type="text/javascript" src="/scripts/controllers/homeController.js"></script>
