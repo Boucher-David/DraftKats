@@ -2,7 +2,8 @@
 
 const express = require('express');
 const app = express();
-const requestProxy = require('express-request-proxy')
+
+var request = require('superagent');
 
 app.use(express.static('./public'));
 
@@ -13,7 +14,10 @@ app.use('/page', express.static(__dirname + '/node_modules/page/'));
 app.listen(process.env.PORT || 5000, function(){
   console.log('surfs up!');
 });
+//
 
-app.get('/api', requestProxy({
-  url: "https://draft.premierleague.com/api/bootstrap-static"
-}));
+app.get('/api', function(req, res) {
+  request.get('http://api.cbssports.com/fantasy/players/average-draft-position?version=3.0&response_format=JSON&SPORT=football').end((err, response) =>{
+    res.send(response.text);
+  });
+});
