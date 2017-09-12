@@ -33,18 +33,17 @@ var app = app || {};
 
   //app.config.roster
   let populateRoster = function() {
-    var source   = $.get(`scripts/roster.hbs`, (template) => {
-      return template;
-    });
-    var template = Handlebars.compile(source);
-    var rosterTemplate = template(app.config.roster[app.config.selected]);
+    $.get(`/scripts/roster.hbs`, (source) => {
+      var template = Handlebars.compile(source);
+      var rosterTemplate = template(app.config.roster[app.config.selected]);
 
-    $('.roster-position').append(rosterTemplate);
-    $.each((app.config.roster[app.config.selected]), function(index, position){
-      console.log();
-      $(`#${position.position}`).val(`${position.value}`);
-    });
+      $('.roster-position').append(rosterTemplate);
+      $.each((app.config.roster[app.config.selected]), function(index, position){
+        console.log();
+        $(`#${position.position}`).val(`${position.value}`);
+      });
 
+    });
   };
   populateRoster();
 })(app);
