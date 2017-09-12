@@ -21,7 +21,7 @@ var app = app || {};
         {"position":"K", "value": 3},
         {"position":"DEF", "value": 3}
       ],
-    "draftOrder": [1,2,3,4,5,5,4,3,2,1,1,2,3,4,5], // example snake draft
+    "draftOrder": [], // example snake draft
     "teamSelected" : { // we need to dynamically build this based on the # of teams in the draft.
       1: [],
       2: [],
@@ -30,6 +30,30 @@ var app = app || {};
       5: []
     }
   };
+
+  let totalSpots = 0;
+
+  $.each(app.config.roster, (index, spot) => {
+    totalSpots += spot.value;
+  });
+
+for (var i = 0; i < totalSpots; i++) {
+  let localI = i + 1;
+
+  // Check for odd
+  if (localI % 2 !== 0) {
+
+    for (var j = 0; j < app.config.teams; j++) {
+      let localJ = j + 1;
+      app.config.draftOrder.push(localJ);
+    }
+  } else { // must be even
+    for (var k = app.config.teams -1; k >= 0; k--) {
+      let localK = k + 1;
+      app.config.draftOrder.push(localK);
+    };
+  }
+}
 
   //api request
   $.get('/api').then(results => {
