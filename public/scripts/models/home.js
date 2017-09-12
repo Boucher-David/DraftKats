@@ -23,13 +23,27 @@ var app = app || {};
       ],
     "draftOrder": [], // example snake draft
     "teamSelected" : { // we need to dynamically build this based on the # of teams in the draft.
-      1: [],
-      2: [],
-      3: [],
-      4: [],
-      5: []
+      1: [{"position": "WR"},{"position": "WR"},{"position": "WR"}]
+
     }
   };
+let checkRoster = function(postion, team){
+  var positionTotal = 0;
+  $.each(app.config.teamSelected[team], (index, player) => {
+    if (player.position = position) {
+      positionTotal += 1;
+    }
+  });
+  let positionValue = $.each(app.config.roster, (index, roster) {
+    if (roster.position = position) {
+      return roster.value;
+    };
+  });
+
+  return (positionTotal === position.value) ? true : false ;
+}
+
+console.log(checkRoster("WR", 1));
 
   let totalSpots = 0;
 
