@@ -3,7 +3,6 @@
 var app = app || {};
 
 (function(module) {
-
 let homeView = [];
 
   $('.dropdown').change(function( event ) {
@@ -23,5 +22,6 @@ let homeView = [];
         var random = Math.floor(options.length * (Math.random() % 1));
         options.attr('selected', false).eq(random).attr('selected', true);
   });
+
   module.homeView = homeView;
 })(app);

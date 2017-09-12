@@ -17,6 +17,5 @@ draftView.index = function() {
     app.draftPlayer.with('Player Name').map(render)
   );
 };
-
   module.draftView = draftView;
 })(app);
