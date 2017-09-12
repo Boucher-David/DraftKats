@@ -45,7 +45,7 @@ var app = app || {};
     var rosterTemplate = template(app.config.roster);
 
     $('.roster-position').append(rosterTemplate);
-    $.each((app.config.roster[app.config.selected]), function(index, position){
+    $.each((app.config.roster), function(index, position){
       $(`#${position.position}`).val(`${position.value}`);
     });
 
