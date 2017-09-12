@@ -15,9 +15,6 @@ var app = app || {};
         {"position":"RB", "value": 3},
         {"position":"QB", "value": 3},
         {"position":"TE", "value": 3},
-        {"position":"WR/RB", "value": 3},
-        {"position":"WR/RB/TE", "value": 3},
-        {"position":"WR/RB/TE/QB", "value": 3},
         {"position":"K", "value": 3},
         {"position":"DEF", "value": 3}
       ],
@@ -43,6 +40,7 @@ var app = app || {};
 
     $('.roster-position').append(rosterTemplate);
     $.each((app.config.roster), function(index, position){
+
       $(`#${position.position}`).val(`${position.value}`);
     });
 
