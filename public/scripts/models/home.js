@@ -42,7 +42,7 @@ var app = app || {};
   let populateRoster = function() {
     var source   = $("#roster-template").html();
     var template = Handlebars.compile(source);
-    var rosterTemplate = template(app.config.roster[app.config.selected]);
+    var rosterTemplate = template(app.config.roster);
 
     $('.roster-position').append(rosterTemplate);
     $.each((app.config.roster[app.config.selected]), function(index, position){
