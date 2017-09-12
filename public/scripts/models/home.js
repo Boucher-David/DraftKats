@@ -5,44 +5,44 @@ var app = app || {};
 
 (function(module) {
   app.config = {
-    "selected": null,
-    "teams": 10,
-    "position": 1,
-    "roster": {
-      "football": [
-        {"position": "WR", "value": 1}
-        {"position": "RB", "value": 2}
-        {"position": "QB", "value": 3}
-      ],
-      "soccer": [
-        {"position": "FWD", "value": 1}
-        {"position": "MID", "value": 2}
-        {"position": "DEF", "value": 3}
-        {"position": "GK", "value": 3}
-      ]
-    }
+    "playerData": [], // put API data here
+    "selected": "",
+    "teams": 5,
+    "position" : 1,
+    "roster": [
+        {"position":"WR", "value": 5},
+        {"position":"RB", "value": 3},
+        {"position":"QB", "value": 3},
+        {"position":"TE", "value": 3},
+        {"position":"K", "value": 3},
+        {"position":"DEF", "value": 3}
+    ],
+    "draftOrder": [], // example snake draft
+    "teamSelected" : {}
   };
 
-  module.home.setConfig = function() {
+  app.setConfig = function() {
     module.config.selected = $('#dropdown').find(':selected').text();
     module.config.teams = $('#teamCount').find(':selected').text();
     module.config.position = $('#userPos').find(':selected').text();
 
-    // need clever way of setting the roster options based on
-    // module.config.roster[module.config.selected] = blah;
-
     // save to local storage when complete
-    module.home.saveConfig();
+    app.saveConfig([{"teams": app.config.teams, "position": app.config.position, "roster": app.config.roster}]);
   },
 
-  module.home.getConfig = function() {
-    let local = localStorage.getItem("DraftKats");
-    console.log(local);
-    (local) ? module.config = local : null ;
+  app.getStorage = function() {
+    let local = JSON.parse(localStorage.getItem("DraftKats"));
+    if (local) {
+      $('#teamCount').val(local[0].teams);
+      $('#userPos').val(local[0].position);
+      $.each(local[0].roster, (index, position) =>{
+        $(`#${position.position}`).val(position.value);
+      });
+    }
   },
 
-  module.home.saveConfig = function() {
-    localStorage.saveItem("DraftKats", module.config);
+  app.saveConfig = function(newConfig) {
+    localStorage.setItem("DraftKats", JSON.stringify(newConfig));
   }
 
 })(app);
