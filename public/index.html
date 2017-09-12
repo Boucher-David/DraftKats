@@ -3,13 +3,59 @@
   <head>
     <meta charset="utf-8">
     <title>Draft Kats</title>
-    <script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
     <meta name = "viewport" content = "width = device-width, initial-scale =1" />
 
     <link rel="stylesheet" href="/styles/reset.css">
     <link rel="stylesheet" href="/styles/base.css">
     <link rel="stylesheet" href="/styles/layout.css">
     <link rel="stylesheet" href="/styles/modules.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+
+    <script id="roster-template" type="text/x-handlebars-template">
+      <h1>Roster Setup </h1>
+      {{#each this}}
+      <div>
+      <p>{{this.position}}</p>
+      <select class="position" id="{{this.position}}">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option
+        <option value="9">9</option>
+        <option value="10">10</option>
+      </select>
+    </div>
+      {{/each}}
+    </script>
+
+    <script id="draft-template" type="text/x-handlebars-template">
+      <article>
+        <h6>Player Name</h6>
+        <p></p>
+      </article>
+      <article>
+        <h6>Team</h6>
+        <p></p>
+      </article>
+      <article>
+        <h6>Position</h6>
+        <p></p>
+      </article>
+      <article>
+        <h6>ADP</h6>
+        <p></p>
+      </article>
+      <article>
+        <h6>BYE</h6>
+        <p></p>
+      </article>
+      <button type="button" onclick="draft()" id="draftPlayer">Draft</button>
+      <br />
+    </script>
 
     <link rel="stylesheet" href="styles/reset.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
@@ -35,6 +81,10 @@
     </script>
 
     <!-- Put third-party script links here (jQuery etc) -->
+    <script src="/jquery/jquery.js"></script>
+    <script src="/handlebars/handlebars.js"></script>
+    <script src="/page/page.js"></script>
+
   </head>
   <body>
     <nav class="main-nav">
@@ -94,19 +144,33 @@
                       <option value="15">15th</option>
                       <option value="16">16th</option>
                     </select>
-                    <button type="button" onclick="randomizeOrder()" class="btn btn-select">Randomize</button>
+
+                    <button id="random-btn" type="button">Randomize</button>
                   </span>
                   <span class="roster-position" title="Roster Position">
                   </span>
-                  <button type="button" onclick="startDraft()" class="btn btn-select">Start Draft!</button>
+                  <button type="button"><a href='/draft'>Start Draft!</a></button>
 
               </div>
             </section>
-        <section id="content-draft" class="draft"></section>
+        <section id="content-draft" class="draft">
+          <nav id="draft-nav" class="main-nav">
+            <ul>
+              <li id="draft">Draft</li>
+              <li id="teams">Teams</li>
+            </ul>
+          </nav>
+          <div class="draft-tab">
+            <p>This is the draft page</p>
+          </div>
+
+          <div class="teams-tab">
+            <p>This will show the team information.</p>
+          </div>
+
+        </section>
         <section id="content-history" class="history"></section>
     </div>
-
-
 
     <script src="http://builds.handlebarsjs.com.s3.amazonaws.com/handlebars-v4.0.10.js"></script>
     <script type="text/javascript" src="/scripts/models/home.js"></script>

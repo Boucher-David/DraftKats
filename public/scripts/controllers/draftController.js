@@ -6,7 +6,7 @@ var app = app || {};
   const draftController = {};
 
   draftController.index = () => {
-
+    $('#content-draft').show().siblings().hide();
   };
 
   module.draftController = draftController;

@@ -1,0 +1,55 @@
+
+
+.main-nav {
+  padding: 0.1em;
+}
+
+.main-nav ul {
+  display: none;
+  padding: 0;
+  list-style: none;
+  clear: both;
+}
+
+.main-nav:hover ul {
+  display: block;
+}
+
+.main-nav li {
+  margin-right: .4em;
+  font-size: 1em;
+  padding: .2em .2em;
+  border-bottom: 1px solid #ccc;
+}
+
+.schoolImage {
+  max-width: 70%;
+}
+
+@media only screen and (min-width: 640px) {
+
+  .icon-menu {
+    display: none;
+  }
+
+  .main-nav {
+    padding: .2em .2em .2em 2em;
+  }
+
+  .main-nav ul {
+    display: block;
+  }
+
+  .main-nav ul li {
+    display: inline;
+    border-bottom: none;
+  }
+
+  .main-nav ul li:mouseover a {
+    color: #29506D;
+  }
+
+.select-dropdown {
+  position: relative;
+  display: inline-block;
+}
