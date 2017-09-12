@@ -23,51 +23,10 @@ var app = app || {};
       ],
     "draftOrder": [], // example snake draft
     "teamSelected" : { // we need to dynamically build this based on the # of teams in the draft.
-      1: [{"position": "WR"},{"position": "WR"},{"position": "WR"}]
+      1: [{"position": "WR"},{"position": "WR"}]
 
     }
   };
-let checkRoster = function(postion, team){
-  var positionTotal = 0;
-  $.each(app.config.teamSelected[team], (index, player) => {
-    if (player.position = position) {
-      positionTotal += 1;
-    }
-  });
-  let positionValue = $.each(app.config.roster, (index, roster) {
-    if (roster.position = position) {
-      return roster.value;
-    };
-  });
-
-  return (positionTotal === position.value) ? true : false ;
-}
-
-console.log(checkRoster("WR", 1));
-
-  let totalSpots = 0;
-
-  $.each(app.config.roster, (index, spot) => {
-    totalSpots += spot.value;
-  });
-
-for (var i = 0; i < totalSpots; i++) {
-  let localI = i + 1;
-
-  // Check for odd
-  if (localI % 2 !== 0) {
-
-    for (var j = 0; j < app.config.teams; j++) {
-      let localJ = j + 1;
-      app.config.draftOrder.push(localJ);
-    }
-  } else { // must be even
-    for (var k = app.config.teams -1; k >= 0; k--) {
-      let localK = k + 1;
-      app.config.draftOrder.push(localK);
-    };
-  }
-}
 
   //api request
   $.get('/api').then(results => {
@@ -77,7 +36,7 @@ for (var i = 0; i < totalSpots; i++) {
   });
 
   //app.config.roster
-  let populateRoster = function() {
+  app.populateRoster = function() {
     var source   = $("#roster-template").html();
     var template = Handlebars.compile(source);
     var rosterTemplate = template(app.config.roster);
@@ -88,5 +47,6 @@ for (var i = 0; i < totalSpots; i++) {
     });
 
   };
-  populateRoster();
-})(app);
+  // this will be moved eventually
+  app.populateRoster();
+})();
