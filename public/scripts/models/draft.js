@@ -3,26 +3,14 @@
 var app = app || {};
 console.log();
 (function(module) {
-  let populateDraft = function() {
+  app.populateDraft = function() {
     $.get(`/scripts/draft.hbs`, (source) => {
-      //var source   = $.get(`scripts/draft.hbs`);
       console.log('draft source ' + source);
       var template = Handlebars.compile(source);
-      //Handlebars.compile(source);
       for (var i = 0; i < 10; i++) {
       $('#content-draft').append(template);
       }
     });
-  populateDraft();
-
-  app.populateDraft = function() {
-      var source   = $("#draft-template").html();
-      var template = Handlebars.compile(source);
-
-      for (var i = 0; i < 10; i++) {
-      $('#content-draft').append(template);
-      }
-    };
 
     // this needs to be moved elsewhere eventually.
     app.populateDraft();

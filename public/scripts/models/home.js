@@ -59,30 +59,18 @@ var app = app || {};
   });
 
   //app.config.roster
-  let populateRoster = function() {
+  app.populateRoster = function() {
     $.get(`/scripts/roster.hbs`, (source) => {
       var template = Handlebars.compile(source);
-      var rosterTemplate = template(app.config.roster[app.config.selected]);
+      var rosterTemplate = template(app.config.roster);
 
       $('.roster-position').append(rosterTemplate);
-      $.each((app.config.roster[app.config.selected]), function(index, position){
+      $.each((app.config.roster), function(index, position){
         console.log();
         $(`#${position.position}`).val(`${position.value}`);
       });
-
-  app.populateRoster = function() {
-    var source   = $("#roster-template").html();
-    var template = Handlebars.compile(source);
-    var rosterTemplate = template(app.config.roster);
-
-    $('.roster-position').append(rosterTemplate);
-    $.each((app.config.roster), function(index, position){
-
-      $(`#${position.position}`).val(`${position.value}`);
     });
-
-    });
-  };
+  }
   // this will be moved eventually
   app.populateRoster();
 })();
