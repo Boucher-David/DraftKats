@@ -6,10 +6,80 @@
     <meta name = "viewport" content = "width = device-width, initial-scale =1" />
 
     <link rel="stylesheet" href="/styles/reset.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:700" rel="stylesheet">
     <link rel="stylesheet" href="/styles/base.css">
     <link rel="stylesheet" href="/styles/layout.css">
     <link rel="stylesheet" href="/styles/modules.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+
+    <script id="roster-template" type="text/x-handlebars-template">
+      <h1>Roster Setup </h1>
+      {{#each this}}
+      <div>
+      <p>{{position}}</p>
+      <select id="{{position}}">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+      </select>
+    </div>
+      {{/each}}
+    </script>
+
+    <script id="draft-template" type="text/x-handlebars-template">
+      <article>
+        <h6>Player Name</h6>
+        <p></p>
+      </article>
+      <article>
+        <h6>Team</h6>
+        <p></p>
+      </article>
+      <article>
+        <h6>Position</h6>
+        <p></p>
+      </article>
+      <article>
+        <h6>ADP</h6>
+        <p></p>
+      </article>
+      <article>
+        <h6>BYE</h6>
+        <p></p>
+      </article>
+      <button type="button" onclick="draft()" id="draftPlayer">Draft</button>
+      <br />
+    </script>
+
+    <link rel="stylesheet" href="styles/reset.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <script id="entry-template" type="text/x-handlebars-template">
+      <h1>Roster Setup </h1>
+      {{#each roster}}
+      <div>
+      <p>{{this.position}}</p>
+      <select class="position" id="{{this.position}}">
+        <option value="1">1st</option>
+        <option value="2">2nd</option>
+        <option value="3">3rd</option>
+        <option value="4">4th</option>
+        <option value="5">5th</option>
+        <option value="6">6th</option>
+        <option value="7">7th</option>
+        <option value="8">8th</option>
+        <option value="9">9th</option>
+        <option value="10">10th</option>
+      </select>
+    </div>
+      {{/each}}
+    </script>
 
     <!-- Put third-party script links here (jQuery etc) -->
     <script src="/jquery/jquery.js"></script>
@@ -21,7 +91,6 @@
     <nav class="main-nav">
       <ul>
         <li id="home"><a href="/">Home</a></li>
-        <li id="history"><a href="/history">History</a></li>
       </ul>
     </nav>
 
@@ -80,7 +149,7 @@
                   </span>
                   <span class="roster-position" title="Roster Position">
                   </span>
-                  <button type="button"><a href='/draft'>Start Draft!</a></button>
+                  <button type="button" id="startDraft"><a href='/draft'>Start Draft!</a></button>
 
               </div>
             </section>
@@ -100,10 +169,13 @@
           </div>
 
         </section>
-        <section id="content-history" class="history"></section>
     </div>
+<<<<<<< HEAD
     <script type="text/javascript" src="/scripts/draft.hbs"></script>
     <script type="text/javascript" src="/scripts/roster.hbs"></script>
+=======
+
+>>>>>>> 5389330e9b7398ea02818a828087a960a918955b
     <script type="text/javascript" src="/scripts/models/home.js"></script>
     <script type="text/javascript" src="/scripts/views/homeView.js"></script>
     <script type="text/javascript" src="/scripts/controllers/homeController.js"></script>
@@ -112,9 +184,6 @@
     <script type="text/javascript" src="/scripts/views/draftView.js"></script>
     <script type="text/javascript" src="/scripts/controllers/draftController.js"></script>
 
-    <script type="text/javascript" src="/scripts/models/history.js"></script>
-    <script type="text/javascript" src="/scripts/views/historyView.js"></script>
-    <script type="text/javascript" src="/scripts/controllers/historyController.js"></script>
     <script src="https://cdn.rawgit.com/visionmedia/page.js/master/page.js"></script>
     <script type="text/javascript" src="/scripts/controllers/routes.js"></script>
 
