@@ -2,9 +2,8 @@
 
 var app = app || {};
 
-(function(module) {
 
-  // delete afterwards
+(function(module) {
   app.config = {
     "playerData": [], // put API data here
     "selected": "",
@@ -17,13 +16,40 @@ var app = app || {};
         {"position":"TE", "value": 3},
         {"position":"K", "value": 3},
         {"position":"DEF", "value": 3}
-      ],
+    ],
     "draftOrder": [], // example snake draft
-    "teamSelected" : { // we need to dynamically build this based on the # of teams in the draft.
-      1: [{"position": "WR"},{"position": "WR"}]
-
-    }
+    "teamSelected" : {}
   };
+
+  app.setConfig = function() {
+    module.config.selected = $('#dropdown').find(':selected').text();
+    module.config.teams = $('#teamCount').find(':selected').text();
+    module.config.position = $('#userPos').find(':selected').text();
+
+    // save to local storage when complete
+    app.saveConfig([{"teams": app.config.teams, "position": app.config.position, "roster": app.config.roster}]);
+  },
+
+  app.getStorage = function() {
+    let local = JSON.parse(localStorage.getItem("DraftKats"));
+    if (local) {
+      $('#teamCount').val(local[0].teams);
+      $('#userPos').val(local[0].position);
+      $.each(local[0].roster, (index, position) =>{
+        $(`#${position.position}`).val(position.value);
+      });
+    }
+  },
+
+  app.saveConfig = function(newConfig) {
+    localStorage.setItem("DraftKats", JSON.stringify(newConfig));
+  }
+
+  let totalSpots = 0;
+
+  $.each(app.config.roster, (index, spot) => {
+    totalSpots += spot.value;
+  });
 
   //api request
   $.get('/api').then(results => {

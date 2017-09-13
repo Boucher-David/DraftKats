@@ -12,9 +12,8 @@ app.use('/handlebars', express.static(__dirname + '/node_modules/handlebars/dist
 app.use('/page', express.static(__dirname + '/node_modules/page/'));
 
 app.listen(process.env.PORT || 5000, function(){
-  console.log('surfs up!');
+  console.log('Touchdown!!');
 });
-//
 
 app.get('/api', function(req, res) {
   request.get('http://api.cbssports.com/fantasy/players/average-draft-position?version=3.0&response_format=JSON&SPORT=football').end((err, response) =>{
