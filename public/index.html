@@ -36,25 +36,25 @@
     <script id="draft-template" type="text/x-handlebars-template">
       <article>
         <h6>Player Name</h6>
-        <p></p>
+        <p>{{name}}</p>
       </article>
       <article>
         <h6>Team</h6>
-        <p></p>
+        <p>{{team}}</p>
       </article>
       <article>
         <h6>Position</h6>
-        <p></p>
+        <p>{{position}}</p>
       </article>
       <article>
         <h6>ADP</h6>
-        <p></p>
+        <p>{{adp}}</p>
       </article>
       <article>
         <h6>BYE</h6>
-        <p></p>
+        <p>{{bye}}</p>
       </article>
-      <button type="button" onclick="draft()" id="draftPlayer">Draft</button>
+      <button type="button" id="draftPlayer">Draft</button>
       <br />
     </script>
 
@@ -170,7 +170,7 @@
 
         </section>
     </div>
-	  
+
     <script type="text/javascript" src="/scripts/models/home.js"></script>
     <script type="text/javascript" src="/scripts/views/homeView.js"></script>
     <script type="text/javascript" src="/scripts/controllers/homeController.js"></script>
