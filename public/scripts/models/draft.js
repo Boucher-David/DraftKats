@@ -6,10 +6,11 @@ var app = app || {};
   
   app.populateDraft = function() {
     $.get(`/scripts/draft.hbs`, (source) => {
-      var template = Handlebars.compile(source);
-      for (var i = 0; i < 10; i++) {
-      $('#content-draft').append(template);
-      }
+      
+      $.each(app.config.playerData, (index, player) => {
+        let template = Handlebars.compile(source);
+        $('#content-draft').append(template(player));
+      });
     });
 
     // this needs to be moved elsewhere eventually.
