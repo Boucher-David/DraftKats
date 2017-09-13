@@ -56,6 +56,9 @@ var app = app || {};
     $.each(JSON.parse(results)['body']['average_draft_position']['players'], (index, player) => {
       app.config.playerData.push({"name": player.fullname, "bye": parseInt(player.bye_week), "adp":player.rank, "position": player.position, "team": player.pro_team});
     });
+  }).then(function(){
+    app.populateDraft();
+
   });
 
   //app.config.roster

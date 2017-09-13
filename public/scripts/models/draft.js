@@ -4,16 +4,17 @@ var app = app || {};
 
 (function(module) {
   app.populateDraft = function() {
-    var source   = $("#draft-template").html();
-    var template = Handlebars.compile(source);
 
-    for (var i = 0; i < 10; i++) {
-    $('#content-draft').append(template);
-    }
+    $.each(app.config.playerData, (index, player) => {
+      let source   = $("#draft-template").html();
+      let template = Handlebars.compile(source);
+      $('#content-draft').append(template(player));
+    });
+  //   for (var i = 0; i < 10; i++) {
+  //     template()
+  //   $('#content-draft').append(template);
+  //   }
   };
-
-  // this needs to be moved elsewhere eventually.
-  app.populateDraft();
 
   app.checkRoster = function(position, team){
     let teamPositionTotal = 0;
