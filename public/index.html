@@ -11,48 +11,7 @@
     <link rel="stylesheet" href="/styles/layout.css">
     <link rel="stylesheet" href="/styles/modules.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-
-    <script id="roster-template" type="text/x-handlebars-template">
-      <h1>Roster Setup </h1>
-      {{#each this}}
-      <div>
-      <p>{{position}}</p>
-      <select id="{{position}}">
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-      </select>
-    </div>
-      {{/each}}
-    </script>
-
-    <script id="draft-template" type="text/x-handlebars-template">
-      <article>
-        <h6>Player Name</h6>
-        <p></p>
-      </article>
-      <article>
-        <h6>Team</h6>
-        <p></p>
-      </article>
-      <article>
-        <h6>Position</h6>
-        <p></p>
-      </article>
-      <article>
-        <h6>ADP</h6>
-        <p></p>
-      </article>
-      <article>
-        <h6>BYE</h6>
-        <p></p>
-      </article>
-      <button type="button" onclick="draft()" id="draftPlayer">Draft</button>
-      <br />
-    </script>
-
+    
     <!-- Put third-party script links here (jQuery etc) -->
     <script src="/jquery/jquery.js"></script>
     <script src="/handlebars/handlebars.js"></script>
