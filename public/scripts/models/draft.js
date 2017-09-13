@@ -1,11 +1,11 @@
 'use strict';
 
 var app = app || {};
-console.log();
+
 (function(module) {
+  
   app.populateDraft = function() {
     $.get(`/scripts/draft.hbs`, (source) => {
-      console.log('draft source ' + source);
       var template = Handlebars.compile(source);
       for (var i = 0; i < 10; i++) {
       $('#content-draft').append(template);
@@ -15,9 +15,11 @@ console.log();
     // this needs to be moved elsewhere eventually.
     app.populateDraft();
 
-    app.checkRoster = function(position, team){
-      let teamPositionTotal = 0;
-      let rosterPositionMax = 0;
+
+  app.checkRoster = function(position, team){
+    let teamPositionTotal = 0;
+    let rosterPositionMax = 0;
+
 
       // loop through the team's roster.
       $.each(app.config.teamSelected[team], (index, player) => {
