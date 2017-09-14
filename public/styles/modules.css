@@ -1,21 +1,21 @@
 
 
-.main-nav {
+#home {
   padding: 0.1em;
 }
 
-.main-nav ul {
+#home ul {
   display: none;
   padding: 0;
   list-style: none;
   clear: both;
 }
 
-.main-nav:hover ul {
+#home:hover ul {
   display: block;
 }
 
-.main-nav li {
+#home li {
   margin-right: .4em;
   font-size: 1em;
   padding: .2em .2em;
