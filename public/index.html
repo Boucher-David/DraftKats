@@ -31,21 +31,25 @@
           <!-- LC: Div for number of teams -->
           <div class="draft-config">
 
-            <span class="select-wrap">
-              <h3># of teams</h3>
-			           <select id="teamCount" name="teamCount">
-	                  <option value="4" selected="selected">4</option>
-                    <option value="6">6</option>
-                    <option value="8">8</option>
-                    <option value="10">10</option>
-                    <option value="12">12</option>
-                    <option value="14">14</option>
-                    <option value="16">16</option>
-                  </select>
-                </span>
+            <div class="select-wrap">
+              <div id="numberOfTeams"><h3># of teams</h3></div>
+              <div id="numberOfTeams">
+                <select id="teamCount" name="teamCount">
+                  <option value="4" selected="selected">4</option>
+                  <option value="6">6</option>
+                  <option value="8">8</option>
+                  <option value="10">10</option>
+                  <option value="12">12</option>
+                  <option value="14">14</option>
+                  <option value="16">16</option>
+                </select>
+              </div>
+            </div>
 
+                <div id="numberOfTeams">
                   <h4>Draft Position</h4>
-                  <span class="select-wrap">
+                </div>
+                  <div id="numberOfTeams" class="select-wrap">
                     <select id="userPos" name="userPos">
                       <option value="1">1st</option>
                       <option value="2">2nd</option>
@@ -66,7 +70,7 @@
                     </select>
 
                     <button id="random-btn" type="button">Randomize</button>
-                  </span>
+                  </div>
                   <span class="roster-position" title="Roster Position">
                   </span>
                   <button type="button" id="startDraft"><a href='/draft'>Start Draft!</a></button>

@@ -20,6 +20,12 @@ body {
   line-height: 2.0;
 }
 
+#numberOfTeams {
+  display: inline-block;
+  /*float: right;
+  clear: both;*/
+}
+
 article {
   display: inline-block;
 }
