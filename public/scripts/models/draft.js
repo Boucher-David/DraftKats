@@ -3,19 +3,15 @@
 var app = app || {};
 
 (function(module) {
-  
+
   app.populateDraft = function() {
     $.get(`/scripts/draft.hbs`, (source) => {
-      
+
       $.each(app.config.playerData, (index, player) => {
         let template = Handlebars.compile(source);
         $('#content-draft').append(template(player));
       });
     });
-
-    // this needs to be moved elsewhere eventually.
-    app.populateDraft();
-
 
   app.checkRoster = function(position, team){
     let teamPositionTotal = 0;
