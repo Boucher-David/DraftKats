@@ -26,29 +26,6 @@
   max-width: 70%;
 }
 
-@media only screen and (min-width: 640px) {
-
-  .icon-menu {
-    display: none;
-  }
-
-  .main-nav {
-    padding: .2em .2em .2em 2em;
-  }
-
-  .main-nav ul {
-    display: block;
-  }
-
-  .main-nav ul li {
-    display: inline;
-    border-bottom: none;
-  }
-
-  .main-nav ul li:mouseover a {
-    color: #29506D;
-  }
-
 .select-dropdown {
   position: relative;
   display: inline-block;
