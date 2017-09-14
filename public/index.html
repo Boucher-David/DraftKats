@@ -5,17 +5,18 @@
     <title>Draft Kats</title>
     <meta name = "viewport" content = "width = device-width, initial-scale =1" />
 
-    <link rel="stylesheet" href="/styles/reset.css">
-    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:700" rel="stylesheet">
+    <link rel="stylesheet" href="/styles/normalize.css">
     <link rel="stylesheet" href="/styles/base.css">
     <link rel="stylesheet" href="/styles/layout.css">
     <link rel="stylesheet" href="/styles/modules.css">
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     
     <!-- Put third-party script links here (jQuery etc) -->
     <script src="/jquery/jquery.js"></script>
     <script src="/handlebars/handlebars.js"></script>
     <script src="/page/page.js"></script>
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 
   </head>
   <body>
@@ -80,25 +81,19 @@
               <li id="teams">Teams</li>
             </ul>
           </nav>
-          <div   class="draft-tab"></div>
+          <div class="draft-tab"></div>
           <div class="teams-tab">
-              <select name="" id="blank"></select>
+              <select id="blank"></select>
               <section id="team-list"></section>
           </div>
 
         </section>
     </div>
 
-    <script type="text/javascript" src="/scripts/models/home.js"></script>
-    <script type="text/javascript" src="/scripts/views/homeView.js"></script>
-    <script type="text/javascript" src="/scripts/controllers/homeController.js"></script>
+    <script type="text/javascript" src="/scripts/appFunctions.js"></script>
+    <script type="text/javascript" src="/scripts/app.js"></script>
 
-    <script type="text/javascript" src="/scripts/models/draft.js"></script>
-    <script type="text/javascript" src="/scripts/views/draftView.js"></script>
-    <script type="text/javascript" src="/scripts/controllers/draftController.js"></script>
-
-    <script src="https://cdn.rawgit.com/visionmedia/page.js/master/page.js"></script>
-    <script type="text/javascript" src="/scripts/controllers/routes.js"></script>
+    <script type="text/javascript" src="/scripts/routes.js"></script>
 
   </body>
 </html>
