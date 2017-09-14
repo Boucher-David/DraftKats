@@ -2,6 +2,111 @@
 
 @media (min-width: 320px) {
 
+  #DraftKats {
+    width: 100%;
+    padding: 1%;
+    display: block;
+    text-align: center;
+    font-size: 30px;
+    line-height: 2.0;
+    background-color: grey;
+  }
+
+  #numberOfTeams {
+    margin: 2%;
+    display: inline-block;
+    /*float: right;
+    clear: both;*/
+  }
+
+  article {
+    display: inline-block;
+  }
+
+  #random-btn {
+    background: #1E90FF;
+    border: none;
+    color: white;
+    padding: 15px 20px;
+    border-radius: 4px;
+    font-family: 'Roboto Condensed', sans-serif;
+    text-align: center;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+  }
+
+  #rosterSetup {
+    width: 100%;
+    padding: 0%;
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 14px;
+    font-family: 'Roboto Condensed', sans-serif;
+    background-color: green;
+  }
+
+  .roster-position {
+    margin: 10% 2%;
+    display: block;
+  }
+
+  /*#positionWrapper {
+    float: right;
+    position: relative;
+    right: 85%;
+    top: 5%
+    text-align: left;
+  }
+
+  #positionWrapper > .position {
+    position: relative;
+    left: 50%;
+  }*/
+
+  #startDraft {
+    background: yellow; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(yellow, red); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(yellow, red); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(yellow, red); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(yellow, red); /* Standard syntax (must be last) */
+    border: none;
+    padding: 15px 20px;
+    border-radius: 4px;
+    text-align: center;
+    font-family: 'Roboto Condensed', sans-serif;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: black;
+    font-size: 16px;
+    cursor: pointer;
+    position: absolute;
+    top: 90%;
+    left: 33%;
+
+  }
+
+  #startDraftButton {
+    text-align: center;
+  }
+
+  #draftPlayer {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 15px 20px;
+    border-radius: 4px;
+    text-align: center;
+    font-family: 'Roboto Condensed', sans-serif;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+  }
+/**/
 
 }
 
