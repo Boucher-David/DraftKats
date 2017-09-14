@@ -20,14 +20,14 @@ var app = app || {};
 
       // loop through the team's roster.
       $.each(app.config.teamSelected[team], (index, player) => {
-        if (player.position = position) {
+        if (player.position === position) {
           teamPositionTotal += 1;
         };
       });
 
       // total available roster spots for the position
       $.each(app.config.roster, (index, roster) => {
-        if (roster.position = position) {
+        if (roster.position === position) {
           rosterPositionMax = roster.value;
         }
       });
