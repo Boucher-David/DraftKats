@@ -23,13 +23,6 @@ Issue 2 (Larry). Added Heroku. URL: https://draftkats.herokuapp.com/
         {"position":"K", "value": 3},
         {"position":"DEF", "value": 3}
     ],
-    "draftOrder": [],
-    "teamSelected" : { 
-      1: [],
-      2: [],
-      3: [],
-      4: [],
-      5: []
-    }
+    "draftOrder": []
   };
 ```
