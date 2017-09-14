@@ -62,6 +62,32 @@ var app = app || {};
         }
       }
     };
+    
+    app.setTeamsTab = function() {
+    for (var i = 0; i < app.config.teams; i++){
+      $('#blank').append($('<option>', {
+        id:   `${i + 1}`,
+        text: `Team ${i + 1}`
+      }));
+
+      $("#team-list").append(
+        $('<div>', {
+          class: `team-${i + 1}`
+        })
+      );
+    };
+  }
+    
+  app.setTeamPlayer = function(team, player) {
+    // take in player data. 
+    $(`.team-${team}`).append(`<h6>${player.position}:</h6><p>${player.name}</p>`);
+  }
+  
+  $('#blank').on('change', function(event){
+    $(`.team-${$(this).children(":selected").attr("id")}`).show().siblings().hide();
+   });
+
+  $("#team-list").children().hide();
 
   $('.teams-tab').hide();
     $('#draft-nav').on('click', function(event){
