@@ -5,6 +5,7 @@ var app = app || {};
 {
     app.home = function() {
         $('#content-home').show().siblings().hide();
+        $('#startDraft').hide();
         app.pingAPI();
         app.getStorage();
         app.populateRoster();
@@ -14,6 +15,8 @@ var app = app || {};
         $('#content-draft').show().siblings().hide();
         app.createDraftOrder();
         app.setTeamsTab();
+
+        app.runAuction();
     }
 
     $('#blank').on('change', function(event){

@@ -20,6 +20,53 @@ var app = app || {};
         "teamSelected" : []
       };
 
+    app.runAuction = function() {
+
+      // if everyone has drafted, don't run function anymore. Clear player data. Tell human the draft is over.
+      if (app.config.draftOrder.length === 0) {
+        app.playerData = [];
+
+        let $teamList = $('#team-list');
+        $teamList.empty();
+        $teamList.append($('div', {
+          text: "Draft Complete"
+        }));
+        return;
+      }
+      // If human is drafting, no need to run AI logic.
+      if (app.config.draftOrder[0] = app.config.position) return;
+      
+      let i = 0;
+      let valid = app.checkRoster(app.config.playerData[i], app.config.draftOrder[0]);
+
+      if (valid > 0) {
+        app.draftPlayer(i, app.config.draftOrder[0]);
+      } else {
+        while(valid === 0) {
+          i++;
+          valid = app.checkRoster(i, app.config.draftOrder[0]);
+        }
+        app.draftPlayer(i, app.config.draftOrder[0]);
+      }
+    }
+
+    app.draftPlayer = function(player, team) {
+      // Push the player drafted into the correct team's [] for later tracking.
+      app.config.teamSelected[team].push(app.config.playerData[i]);
+
+      // Highlight the player being drafted by giving them blue BG.
+      // Then fade out that element, and finally remove it completely from list.
+      $(`#${app.config.playerData[player].name}`).css().fadeOut(1000).remove();
+
+      // Remove the player from the player data so we can't draft them again
+      app.config.playerData.splice(app.config.playerData[player], 1);
+
+      // When team has drafted, remove them from snake list so they can't draft again
+      app.config.draftOrder.splice(0, 1);
+
+      app.config.runAuction();
+    }
+
     app.populateDraft = function() {
         $.get(`/scripts/draft.hbs`, (source) => {
             $.each(app.config.playerData, (index, player) => {
@@ -126,6 +173,7 @@ var app = app || {};
             });
         }).then(function(){
             app.populateDraft();
+            $('#startDraft').show();
         });
     }
 
