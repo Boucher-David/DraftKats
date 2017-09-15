@@ -45,6 +45,7 @@ article {
   cursor: pointer;
 }
 
+
 #startDraft {
   background: yellow; /* For browsers that do not support gradients */
   background: -webkit-linear-gradient(yellow, red); /* For Safari 5.1 to 6.0 */
