@@ -17,13 +17,24 @@ var app = app || {};
             {"position":"DEF", "value": 3}
         ],
         "draftOrder": [], // example snake draft
-        "teamSelected" : []
+        "teamSelected" : {
+          1: [],
+          2: [],
+          3: [],
+          4: [],
+          5: [],
+          6: [],
+          7: [],
+          8: [],
+          9: [],
+          10: [],
+        }
       };
 
     app.runAuction = function() {
-
       // if everyone has drafted, don't run function anymore. Clear player data. Tell human the draft is over.
       if (app.config.draftOrder.length === 0) {
+
         app.playerData = [];
 
         let $teamList = $('#team-list');
@@ -33,13 +44,16 @@ var app = app || {};
         }));
         return;
       }
-      // If human is drafting, no need to run AI logic.
-      if (app.config.draftOrder[0] = app.config.position) return;
-      
-      let i = 0;
-      let valid = app.checkRoster(app.config.playerData[i], app.config.draftOrder[0]);
 
-      if (valid > 0) {
+      // If human is drafting, no need to run AI logic.
+
+      if (app.config.draftOrder[0] === app.config.position) return;
+
+      let i = 0;
+
+      let valid = app.checkRoster(app.config.playerData[i].position, app.config.draftOrder[0]);
+
+      if (valid === "safe" || valid > 0) {
         app.draftPlayer(i, app.config.draftOrder[0]);
       } else {
         while(valid === 0) {
@@ -51,27 +65,42 @@ var app = app || {};
     }
 
     app.draftPlayer = function(player, team) {
+
       // Push the player drafted into the correct team's [] for later tracking.
-      app.config.teamSelected[team].push(app.config.playerData[i]);
+      (app.config.teamSelected[team]).push(app.config.playerData[player]);
 
       // Highlight the player being drafted by giving them blue BG.
       // Then fade out that element, and finally remove it completely from list.
-      $(`#${app.config.playerData[player].name}`).css().fadeOut(1000).remove();
+      $(`#${app.config.playerData[player].id}`).css('background-color', 'blue').fadeOut(2000, () => {
+        $(this).remove();
+        // Remove the player from the player data so we can't draft them again
+        app.config.playerData.splice(app.config.playerData[player], 1);
+      
+        // When team has drafted, remove them from snake list so they can't draft again
+        app.config.draftOrder.shift();
 
-      // Remove the player from the player data so we can't draft them again
-      app.config.playerData.splice(app.config.playerData[player], 1);
+        app.runAuction();
+      });
+      
+      // // Remove the player from the player data so we can't draft them again
+      // app.config.playerData.splice(app.config.playerData[player], 1);
 
-      // When team has drafted, remove them from snake list so they can't draft again
-      app.config.draftOrder.splice(0, 1);
+      // // When team has drafted, remove them from snake list so they can't draft again
+      // app.config.draftOrder.shift();
 
-      app.config.runAuction();
+      // app.runAuction();
     }
 
     app.populateDraft = function() {
         $.get(`/scripts/draft.hbs`, (source) => {
             $.each(app.config.playerData, (index, player) => {
+
+                let localPlayer = player;
+                
+                localPlayer.id = localPlayer.name.replace(" ","_").replace("'","");
+                
                 let template = Handlebars.compile(source);
-                $('.draft-tab').append(template(player));
+                $('.draft-tab').append(template(localPlayer));
             });
         })
     }
@@ -80,9 +109,11 @@ var app = app || {};
         let teamPositionTotal = 0;
         let rosterPositionMax = 0;
     
+        if (app.config.teamSelected[team].length === 0) return "safe";
     
           // loop through the team's roster.
           $.each(app.config.teamSelected[team], (index, player) => {
+
             if (player.position === position) {
               teamPositionTotal += 1;
             };
@@ -94,6 +125,7 @@ var app = app || {};
               rosterPositionMax = roster.value;
             }
           });
+
           return rosterPositionMax - teamPositionTotal;
     };
 
@@ -125,6 +157,7 @@ var app = app || {};
 
     app.setTeamsTab = function() {
         for (var i = 0; i < app.config.teams; i++){
+
           $('#blank').append($('<option>', {
             id:   `${i + 1}`,
             text: `Team ${i + 1}`
@@ -184,7 +217,6 @@ var app = app || {};
     
           $('.roster-position').append(rosterTemplate);
           $.each((app.config.roster), function(index, position){
-            console.log();
             $(`#${position.position}`).val(`${position.value}`);
           });
         });
