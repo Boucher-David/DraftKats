@@ -52,7 +52,7 @@ var app = app || {};
       let i = 0;
 
       let valid = app.checkRoster(app.config.playerData[i].position, app.config.draftOrder[0]);
-
+      console.log(valid);
       if (valid === "safe" || valid > 0) {
         app.draftPlayer(i, app.config.draftOrder[0]);
       } else {
@@ -78,17 +78,8 @@ var app = app || {};
       
         // When team has drafted, remove them from snake list so they can't draft again
         app.config.draftOrder.shift();
-
         app.runAuction();
       });
-      
-      // // Remove the player from the player data so we can't draft them again
-      // app.config.playerData.splice(app.config.playerData[player], 1);
-
-      // // When team has drafted, remove them from snake list so they can't draft again
-      // app.config.draftOrder.shift();
-
-      // app.runAuction();
     }
 
     app.populateDraft = function() {
