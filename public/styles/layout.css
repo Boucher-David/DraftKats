@@ -186,6 +186,12 @@
 
   #startDraftButton {
     text-align: center;
+    text-decoration: none;
+  }
+
+  #startDraftButton a:link, a:visited {
+    text-decoration: none;
+    color: black;
   }
 
   .draftPlayer {

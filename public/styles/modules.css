@@ -11,27 +11,26 @@
 
 /* Teams Page */
 .team- {
-  height: 1000px;
+  height: 100%;
   max-width: 100%;
   max-height: inherit;
-
 }
 
 .teams-tab {
   max-width: 100%;
-  margin-left: 10%;
-  margin-right: 10%;
   padding-top: 0.5%;
-  margin: 10%;
   min-height: 1000000px;
   height: 100%;
   width: 100%;
+  font-size: 20px;
+  text-align: center;
 }
 
 #blank {
   color: white;
   font-size: 20px;
   background-color: gray;
+  margin-top: 2%;
 }
 
 #team-list {
@@ -47,10 +46,11 @@
 /* Logo */
 #DraftKats{
   text-decoration: none;
-  color: black;
+  color: white;
+  font-size: 90px;
 }
 
 #DraftKats a:link, a:visited {
-    color: black;
+    color: white;
     text-decoration: none;
 }
