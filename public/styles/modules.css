@@ -7,3 +7,50 @@
   position: relative;
   display: inline-block;
 }
+
+
+/* Teams Page */
+.team- {
+  height: 1000px;
+  max-width: 100%;
+  max-height: inherit;
+
+}
+
+.teams-tab {
+  max-width: 100%;
+  margin-left: 10%;
+  margin-right: 10%;
+  padding-top: 0.5%;
+  margin: 10%;
+  min-height: 1000000px;
+  height: 100%;
+  width: 100%;
+}
+
+#blank {
+  color: white;
+  font-size: 20px;
+  background-color: gray;
+}
+
+#team-list {
+ background: transparent;
+ border: none;
+ color: white;
+ font-size: 20px;
+ height: 5%;
+ padding: .2%;
+ width: 100%;
+}
+
+/* Logo */
+#DraftKats{
+  text-decoration: none;
+  color: black;
+}
+
+#DraftKats a:link, a:visited {
+    color: black;
+    text-decoration: none;
+}
