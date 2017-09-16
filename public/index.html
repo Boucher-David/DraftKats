@@ -5,8 +5,7 @@
     <title>Draft Kats</title>
     <meta name = "viewport" content = "width = device-width, initial-scale =1" />
 
-    <link rel="stylesheet" href="/styles/reset.css">
-    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:700" rel="stylesheet">
+    <link rel="stylesheet" href="/styles/normalize.css">
     <link rel="stylesheet" href="/styles/base.css">
     <link rel="stylesheet" href="/styles/layout.css">
     <link rel="stylesheet" href="/styles/modules.css">
@@ -17,63 +16,61 @@
     <script src="/handlebars/handlebars.js"></script>
     <script src="/page/page.js"></script>
 
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Satisfy" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Cabin+Condensed" rel="stylesheet">
   </head>
   <body>
 
-    <nav class="main-nav">
-      <ul>
-        <li id="home"><a href="/">Home</a></li>
-      </ul>
-    </nav>
+    <div id="DraftKats">DraftKats</div>
 
     <div id="main">
         <section id="content-home" class="home">
 
           <!-- LC: Div for number of teams -->
-          <div class="draft-config">
-
-            <span class="select-wrap">
-              <h3># of teams</h3>
-			           <select id="teamCount" name="teamCount">
-	                  <option value="4" selected="selected">4</option>
-                    <option value="6">6</option>
-                    <option value="8">8</option>
-                    <option value="10">10</option>
-                    <option value="12">12</option>
-                    <option value="14">14</option>
-                    <option value="16">16</option>
-                  </select>
-                </span>
-
-                  <h4>Draft Position</h4>
-                  <span class="select-wrap">
-                    <select id="userPos" name="userPos">
-                      <option value="1">1st</option>
-                      <option value="2">2nd</option>
-                      <option value="3">3rd</option>
-                      <option value="4">4th</option>
-                      <option value="5">5th</option>
-                      <option value="6">6th</option>
-                      <option value="7">7th</option>
-                      <option value="8">8th</option>
-                      <option value="9">9th</option>
-                      <option value="10">10th</option>
-                      <option value="11">11th</option>
-                      <option value="12">12th</option>
-                      <option value="13">13th</option>
-                      <option value="14">14th</option>
-                      <option value="15">15th</option>
-                      <option value="16">16th</option>
-                    </select>
-
-                    <button id="random-btn" type="button">Randomize</button>
-                  </span>
-                  <span class="roster-position" title="Roster Position">
-                  </span>
-                  <button type="button" id="startDraft"><a href='/draft'>Start Draft!</a></button>
-
+          <!-- <div class="draft-config"> -->
+            <div class="select-wrap">
+              <div id="numberOfTeams"><h3>Number of teams</h3></div>
+              <div id="numberOfTeams">
+                <select id="teamCount" name="teamCount">
+                  <option value="4" selected="selected">4</option>
+                  <option value="6">6</option>
+                  <option value="8">8</option>
+                  <option value="10">10</option>
+                  <option value="12">12</option>
+                  <option value="14">14</option>
+                  <option value="16">16</option>
+                </select>
               </div>
-            </section>
+            </div>
+            <div id="numberOfTeams"><h4>Draft Position</h4></div>
+              <div id="numberOfTeams" class="select-wrap">
+                <select id="userPos" name="userPos">
+                  <option value="1">1st</option>
+                  <option value="2">2nd</option>
+                  <option value="3">3rd</option>
+                  <option value="4">4th</option>
+                  <option value="5">5th</option>
+                  <option value="6">6th</option>
+                  <option value="7">7th</option>
+                  <option value="8">8th</option>
+                  <option value="9">9th</option>
+                  <option value="10">10th</option>
+                  <option value="11">11th</option>
+                  <option value="12">12th</option>
+                  <option value="13">13th</option>
+                  <option value="14">14th</option>
+                  <option value="15">15th</option>
+                  <option value="16">16th</option>
+                </select>
+
+                <button id="random-btn" type="button">Randomize</button>
+              </div>
+              <div class="roster-position" title="Roster Position"></div>
+              <div id="startDraftButton">
+                <button type="button" id="startDraft"><a href='/draft'>Start Draft!</a></button>
+              </div>
+        </section>
         <section id="content-draft" class="draft">
           <nav id="draft-nav" class="main-nav">
             <ul>
@@ -86,22 +83,16 @@
           </div>
 
           <div class="teams-tab">
-            <p>This will show the team information.</p>
+              <select id="blank"></select>
+              <section id="team-list"></section>
           </div>
 
         </section>
     </div>
 
-    <script type="text/javascript" src="/scripts/models/home.js"></script>
-    <script type="text/javascript" src="/scripts/views/homeView.js"></script>
-    <script type="text/javascript" src="/scripts/controllers/homeController.js"></script>
-
-    <script type="text/javascript" src="/scripts/models/draft.js"></script>
-    <script type="text/javascript" src="/scripts/views/draftView.js"></script>
-    <script type="text/javascript" src="/scripts/controllers/draftController.js"></script>
-
-    <script src="https://cdn.rawgit.com/visionmedia/page.js/master/page.js"></script>
-    <script type="text/javascript" src="/scripts/controllers/routes.js"></script>
-
+    <script type="text/javascript" src="/scripts/appFunctions.js"></script>
+    <script type="text/javascript" src="/scripts/app.js"></script>
+    <script type="text/javascript" src="/scripts/routes.js"></script>
+    <script src="/images"></script>
   </body>
 </html>
