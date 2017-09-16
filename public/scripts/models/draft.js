@@ -9,7 +9,7 @@ var app = app || {};
 
       $.each(app.config.playerData, (index, player) => {
         let template = Handlebars.compile(source);
-        $('#content-draft').append(template(player));
+        $('.draft-tab').append(template(player));
       });
     });
 

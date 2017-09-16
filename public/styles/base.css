@@ -7,10 +7,6 @@
   line-height: 2.0;
 }
 
-article {
-  display: inline-block;
-}
-
 #random-btn {
   background: #1E90FF;
   border: none;
@@ -49,7 +45,7 @@ article {
   background-color: #4CAF50;
   border: none;
   color: white;
-  padding: 15px 20px;
+  padding: 25px 30px;
   border-radius: 4px;
   text-align: center;
   font-family: 'Roboto Condensed', sans-serif;
@@ -58,6 +54,7 @@ article {
   font-size: 16px;
   margin: 4px 2px;
   cursor: pointer;
+  float: inherit;
 }
 
 #draft-nav ul {
@@ -87,4 +84,27 @@ article {
 
 #draft-nav li .active {
     background-color: #4CAF50;
+}
+
+.draft-tab {
+  padding-top: 0em;
+  font-size: 20px;
+  text-align: center;
+}
+
+.draft-tab div {
+  width: 100%;
+  display: inline-block;
+  font-size: 25px;
+  padding: 0em 2em 0em 1.5em;
+  height: 0px;
+
+}
+
+.draft-tab div article {
+  display: inline-block;
+  padding-top: .5em;
+  padding-left: 2em;
+  padding-right: 2em;
+  padding-bottom: 0em;
 }
