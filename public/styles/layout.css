@@ -21,7 +21,7 @@
   }
 
   #numberOfTeams {
-    margin: 0% 1%;
+    margin: 0% 3%;
     display: inline-block;
     color: black;
     font-family: 'Cabin Condensed', sans-serif;
@@ -116,7 +116,7 @@
     position: relative;
     left: 8%;
     color: black;
-    padding: 2% 8%;
+    padding: 1% 8%;
 
     -webkit-appearance: button;
     -webkit-border-radius: 2px;
