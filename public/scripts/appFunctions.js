@@ -40,7 +40,7 @@ var app = app || {};
     app.runAuction = function() {
       $('#intro').hide();
       // if everyone has drafted, don't run function anymore. Clear player data. Tell human the draft is over.
-      if (app.config.draftOrder.length === 0) {
+      if (app.config.draftOrder.length === 0)
         app.config.playerData = [];
 
         let $teamList = $('.draft-tab');
