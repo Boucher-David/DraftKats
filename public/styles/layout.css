@@ -1,10 +1,5 @@
-.draft-tab  {
+#content-draft  {
     background-image: url("https://www.pixelstalk.net/wp-content/uploads/2016/10/Desktop-Football-Field-Backgrounds.jpeg");
-    /*background-color: #cccccc;*/
-}
-
-#content-draft {
-  background: white; opacity: 0.65;
 }
 
 .draft-tab {
@@ -19,7 +14,6 @@
   font-size: 25px;
   padding: 0em 2em 0em 1.5em;
   height: 0px;
-
 }
 
 .draft-tab div article {
