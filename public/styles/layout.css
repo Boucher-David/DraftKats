@@ -395,6 +395,7 @@
       white-space: nowrap;
       width: 70px;
       height: 50px;
+      margin-bottom: 0;
     }
 
     #numberOfTeams > #userPos {
@@ -415,6 +416,7 @@
       white-space: nowrap;
       width: 70px;
       height: 50px;
+      margin-bottom: 0;
     }
 
     #random-btn {
@@ -500,8 +502,8 @@
       font-size: 26px;
       cursor: pointer;
       position: absolute;
-      top: 90%;
-      left: 40%;
+      top: 95%;
+      left: 41%;
     }
 
     #startDraftButton {
