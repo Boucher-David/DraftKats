@@ -190,7 +190,6 @@ var app = app || {};
           $(`#userPos option[value=${local.position}]`).attr('selected','selected');
 
           $.each(local.roster, (index, position) =>{
-            console.log(position.position);
             $(`#${position.position} option[value=${position.value}]`).attr('selected','selected');
           });
         } catch(err){
@@ -223,6 +222,7 @@ var app = app || {};
           $.each((app.config.roster), function(index, position){
             $(`#${position.position}`).val(`${position.value}`);
           });
+          app.getStorage();
         });
     }    
 }

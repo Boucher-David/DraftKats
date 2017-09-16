@@ -9,7 +9,6 @@ var app = app || {};
         $('#content-home').show().siblings().hide();
         $('#startDraft').hide();
         app.pingAPI();
-        app.getStorage();
         app.populateRoster();
     }
 
