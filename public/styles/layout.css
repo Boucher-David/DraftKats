@@ -19,7 +19,7 @@
 .draft-tab div article {
   display: inline-block;
   padding-top: .5em;
-  padding-left: 2em;
+  padding-left: 8em;
   padding-right: 2em;
   padding-bottom: 0em;
 }
@@ -96,7 +96,7 @@
 
   article {
     display: inline-block;
-    color: red;
+    color: white;
   }
 
   #random-btn {
@@ -189,7 +189,7 @@
     text-align: center;
   }
 
-  #draftPlayer {
+  .draftPlayer {
     background-color: #4CAF50;
     border: none;
     color: white;
