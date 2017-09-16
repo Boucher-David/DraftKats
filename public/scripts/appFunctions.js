@@ -9,22 +9,91 @@ var app = app || {};
         "teams": 5,
         "position" : 1,
         "roster": [
-            {"position":"WR", "value": 5},
-            {"position":"RB", "value": 2},
-            {"position":"QB", "value": 3},
-            {"position":"TE", "value": 3},
-            {"position":"K", "value": 3},
-            {"position":"DEF", "value": 3}
+            {"position":"WR", "value": 1},
+            {"position":"RB", "value": 1},
+            {"position":"QB", "value": 1},
+            {"position":"TE", "value": 1},
+            {"position":"K", "value": 1},
+            {"position":"DST", "value": 1}
         ],
         "draftOrder": [], // example snake draft
-        "teamSelected" : []
+        "teamSelected" : {
+          1: [],
+          2: [],
+          3: [],
+          4: [],
+          5: [],
+          6: [],
+          7: [],
+          8: [],
+          9: [],
+          10: [],
+          11: [],
+          12: [],
+          13: [],
+          14: [],
+          15: [],
+          16: [],
+        }
       };
+
+    app.runAuction = function() {
+      // if everyone has drafted, don't run function anymore. Clear player data. Tell human the draft is over.
+      if (app.config.draftOrder.length === 0) {
+        app.config.playerData = [];
+
+        let $teamList = $('.draft-tab');
+        $teamList.remove();
+        return;
+      }
+      // If human is drafting, no need to run AI logic.
+      if (app.config.draftOrder[0] === app.config.position) return;
+
+      let i = 0;
+
+      let valid = app.checkRoster(app.config.playerData[i].position, app.config.draftOrder[0]);
+
+      if ((valid === "safe") || (valid > 0)) {
+        app.draftPlayer(i, app.config.draftOrder[0]);
+      } else {
+        while(valid === 0) {
+          i++;
+          valid = app.checkRoster(app.config.playerData[i].position, app.config.draftOrder[0]);
+        }
+        app.draftPlayer(i, app.config.draftOrder[0]);
+      }
+    }
+
+    app.draftPlayer = function(player, team) {
+      // Push the player drafted into the correct team's [] for later tracking.
+
+      // Highlight the player being drafted by giving them blue BG.
+      // Then fade out that element, and finally remove it completely from list.
+      $(`#${app.config.playerData[player].id}`).css('background-color', 'blue').fadeOut(2000, () => {
+        (app.config.teamSelected[team]).push(app.config.playerData[player]);
+
+        app.setTeamPlayer(team , app.config.playerData[player]);
+        $(this).remove();
+        // Remove the player from the player data so we can't draft them again
+        app.config.playerData.splice(player, 1);
+      
+        // When team has drafted, remove them from snake list so they can't draft again
+        app.config.draftOrder.shift();
+  
+        app.runAuction();
+      });
+    }
 
     app.populateDraft = function() {
         $.get(`/scripts/draft.hbs`, (source) => {
             $.each(app.config.playerData, (index, player) => {
+
+                let localPlayer = player;
+                
+                localPlayer.id = localPlayer.name.replace(" ","_").replace("'","").replace(".","_").replace(".","_");
+                
                 let template = Handlebars.compile(source);
-                $('.draft-tab').append(template(player));
+                $('.draft-tab').append(template(localPlayer));
             });
         })
     }
@@ -33,9 +102,11 @@ var app = app || {};
         let teamPositionTotal = 0;
         let rosterPositionMax = 0;
     
+        if (app.config.teamSelected[team].length === 0) return "safe";
     
           // loop through the team's roster.
           $.each(app.config.teamSelected[team], (index, player) => {
+
             if (player.position === position) {
               teamPositionTotal += 1;
             };
@@ -47,6 +118,7 @@ var app = app || {};
               rosterPositionMax = roster.value;
             }
           });
+
           return rosterPositionMax - teamPositionTotal;
     };
 
@@ -77,42 +149,53 @@ var app = app || {};
     }
 
     app.setTeamsTab = function() {
-        for (var i = 0; i < app.config.teams; i++){
+        for (let i = 0; i < app.config.teams; i++){
+
           $('#blank').append($('<option>', {
             id:   `${i + 1}`,
             text: `Team ${i + 1}`
           }));
     
+        };
+
+        for (let i = 0; i < 16; i ++) {
           $("#team-list").append(
             $('<div>', {
               class: `team-${i + 1}`
             })
           );
-        };
+        }
     }
     app.setTeamPlayer = function(team, player) {
+
         // take in player data. 
         $(`.team-${team}`).append(`<h6>${player.position}:</h6><p>${player.name}</p>`);
     }
 
     app.setConfig = function() {
-        module.config.selected = $('#dropdown').find(':selected').text();
-        module.config.teams = $('#teamCount').find(':selected').text();
-        module.config.position = $('#userPos').find(':selected').text();
-    
+        app.config.teams = parseInt($('#teamCount').find(':selected').text());
+        app.config.position = parseInt($('#userPos').find(':selected').val());
+        $.each(app.config.roster, (index, position) => {
+          app.config.roster[index].value = parseInt($(`#${position.position}`).find(':selected').val());
+        });
         // save to local storage when complete
         app.saveConfig([{"teams": app.config.teams, "position": app.config.position, "roster": app.config.roster}]);
     }
 
     app.getStorage = function() {
-        let local = JSON.parse(localStorage.getItem("DraftKats"));
-        if (local) {
-          $('#teamCount').val(local[0].teams);
-          $('#userPos').val(local[0].position);
-          $.each(local[0].roster, (index, position) =>{
-            $(`#${position.position}`).val(position.value);
+        
+        try {
+          let local = JSON.parse(localStorage.getItem("DraftKats"))[0];
+          $(`#teamCount option[value=${local.teams}]`).attr('selected', 'selected');
+          $(`#userPos option[value=${local.position}]`).attr('selected','selected');
+
+          $.each(local.roster, (index, position) =>{
+            $(`#${position.position} option[value=${position.value}]`).attr('selected','selected');
           });
+        } catch(err){
+          return;
         }
+
       }
 
     app.saveConfig = function(newConfig) {
@@ -126,6 +209,7 @@ var app = app || {};
             });
         }).then(function(){
             app.populateDraft();
+            $('#startDraft').show();
         });
     }
 
@@ -136,9 +220,9 @@ var app = app || {};
     
           $('.roster-position').append(rosterTemplate);
           $.each((app.config.roster), function(index, position){
-            console.log();
             $(`#${position.position}`).val(`${position.value}`);
           });
+          app.getStorage();
         });
     }    
 }
