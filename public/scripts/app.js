@@ -14,6 +14,7 @@ var app = app || {};
     }
 
     app.draft = function() {
+        app.setConfig();
         $('#content-draft').show().siblings().hide();
         app.createDraftOrder();
         app.setTeamsTab();
@@ -28,6 +29,10 @@ var app = app || {};
 
             let playerIndex = app.config.playerData.findIndex(getIndex);
 
+            if (app.checkRoster(app.config.playerData[playerIndex].position,app.config.position) === 0) {
+                $(this).css('color', 'red');
+            return;
+            }
             app.draftPlayer(playerIndex, app.config.position);
         });
         app.runAuction();
@@ -41,7 +46,7 @@ var app = app || {};
     $("#team-list").children().hide();
     
     $('#draft-nav').on('click', function(event){
-        console.log(event);
+
         $(`.${event.target.id}-tab`).show().siblings().not('#draft-nav').hide();
     });
 
