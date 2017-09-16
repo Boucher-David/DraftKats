@@ -41,7 +41,7 @@
     display: block;
     text-align: center;
     font-size: 50px;
-    color: black;
+    color: white;
     line-height: 2.0;
     background-color: grey;
     font-family: 'Satisfy', cursive;
@@ -51,7 +51,7 @@
   #numberOfTeams {
     margin: 0% 3%;
     display: inline-block;
-    color: black;
+    color: white;
     font-family: 'Cabin Condensed', sans-serif;
   }
 
@@ -143,7 +143,7 @@
   .positionWrapper > .position {
     position: relative;
     left: 8%;
-    color: black;
+    color: white;
     padding: 1% 8%;
 
     -webkit-appearance: button;
@@ -212,7 +212,7 @@
       padding: 1%;
       display: block;
       text-align: center;
-      color: black;
+      color: white;
       font-size: 80px;
       line-height: 2.0;
       background-color: grey;
@@ -222,7 +222,7 @@
     #numberOfTeams {
       margin: .5% 5%;
       display: inline-block;
-      color: black;
+      color: white;
       text-transform: uppercase;
       font-family: 'Cabin Condensed', sans-serif;
     }
@@ -310,7 +310,7 @@
       right: 10%;
       top: 5%
       text-align: left;
-      color: black;
+      color: white;
       font-size: 25px;
       padding: 2% 10%;
     }
@@ -389,18 +389,18 @@
       padding: 0%;
       display: block;
       text-align: center;
-      font-size: 80px;
-      color: black;
+      font-size: 60px;
+      color: white;
       line-height: 2.0;
       background-color: grey;
       font-family: 'Satisfy', cursive;
     }
 
     #numberOfTeams {
-      margin: 5% 10%;
+      margin: 0% 10%;
       margin-bottom: 0;
       display: inline-block;
-      color: black;
+      color: white;
       font-family: 'Cabin Condensed', sans-serif;
       font-size: 25px;
     }
@@ -424,6 +424,7 @@
       width: 70px;
       height: 50px;
       margin-bottom: 0;
+      padding-bottom: 0;
     }
 
     #numberOfTeams > #userPos {
@@ -445,6 +446,7 @@
       width: 70px;
       height: 50px;
       margin-bottom: 0;
+      padding-bottom: 0;
     }
 
     #random-btn {
@@ -458,7 +460,7 @@
       text-transform: uppercase;
       text-decoration: none;
       font-size: 30px;
-      margin: 40px;
+      margin: 0px 40px;
       cursor: pointer;
     }
 
@@ -469,12 +471,15 @@
       text-align: center;
       font-size: 20px;
       font-family: 'Roboto Condensed', sans-serif;
-      background-color: silver;
+      background-color:r;
+      margin-bottom: 0;
+      margin-top: 0;
     }
 
     .roster-position {
       margin: 10% 2%;
       display: block;
+      margin-bottom: 0;
     }
 
     .positionWrapper {
@@ -484,8 +489,9 @@
       top: 5%
       text-align: left;
       font-size: 30px;
-      color: black;
+      color: white;
       padding: 2% 12%;
+      margin-bottom: 0;
     }
 
     .positionWrapper > .position {
@@ -493,7 +499,7 @@
       left: 10%;
       color: black;
       padding: 2% 12%;
-
+      margin-bottom: 0;
       -webkit-appearance: button;
       -webkit-border-radius: 2px;
       -webkit-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
@@ -530,12 +536,13 @@
       font-size: 26px;
       cursor: pointer;
       position: absolute;
-      top: 95%;
+      top: 100%;
       left: 41%;
     }
 
-    #startDraftButton {
+    #startDraftButton:link {
       text-align: center;
+      text-decoration: none;
     }
 
     #draftPlayer {
