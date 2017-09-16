@@ -38,6 +38,7 @@ var app = app || {};
       };
 
     app.runAuction = function() {
+      $('#intro').hide();
       // if everyone has drafted, don't run function anymore. Clear player data. Tell human the draft is over.
       if (app.config.draftOrder.length === 0) {
         app.config.playerData = [];
@@ -47,7 +48,10 @@ var app = app || {};
         return;
       }
       // If human is drafting, no need to run AI logic.
-      if (app.config.draftOrder[0] === app.config.position) return;
+      if (app.config.draftOrder[0] === app.config.position) {
+        $('#intro').show();
+        return;
+      }
 
       let i = 0;
 
