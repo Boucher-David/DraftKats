@@ -126,7 +126,6 @@
   }
 
   .roster-position {
-    margin: 10% 2%;
     display: block;
   }
 
@@ -300,7 +299,6 @@
     }
 
     .roster-position {
-      margin: 10% 2%;
       display: block;
     }
 
@@ -477,7 +475,6 @@
     }
 
     .roster-position {
-      margin: 10% 2%;
       display: block;
       margin-bottom: 0;
     }
@@ -533,11 +530,12 @@
       text-transform: uppercase;
       text-decoration: none;
       color: black;
-      font-size: 26px;
       cursor: pointer;
       position: absolute;
-      top: 100%;
+      top: 90%;
       left: 41%;
+      width: 350px;
+      height: 100px;
     }
 
     #startDraftButton:link {
