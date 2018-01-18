@@ -1,0 +1,28 @@
+{
+  "name": "draftkats",
+  "version": "1.0.0",
+  "description": "We are developing mobile-first, so make sure to set your screen resolution to iPhone4 (320x480).",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Boucher-David/DraftKats.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Boucher-David/DraftKats/issues"
+  },
+  "homepage": "https://github.com/Boucher-David/DraftKats#readme",
+  "dependencies": {
+    "express": "^4.15.4",
+    "express-request-proxy": "^2.0.0",
+    "handlebars": "^4.0.10",
+    "jquery": "^3.2.1",
+    "page": "^1.7.1",
+    "superagent": "^3.6.0"
+  }
+}

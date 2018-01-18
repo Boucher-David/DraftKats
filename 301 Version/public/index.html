@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Draft Kats</title>
+    <link rel="shortcut icon" href="/images/football-kitty.ico">
+    <meta name = "viewport" content = "width = device-width, initial-scale =1" />
+
+    <link rel="stylesheet" href="/styles/normalize.css">
+    <link rel="stylesheet" href="/styles/base.css">
+    <link rel="stylesheet" href="/styles/layout.css">
+    <link rel="stylesheet" href="/styles/modules.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+
+    <!-- Put third-party script links here (jQuery etc) -->
+    <script src="/jquery/jquery.js"></script>
+    <script src="/handlebars/handlebars.js"></script>
+    <script src="/page/page.js"></script>
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Satisfy" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Cabin+Condensed" rel="stylesheet">
+  </head>
+  <body>
+
+    <div id="DraftKats"><a href="/">DraftKats</a></div>
+
+    <div id="main">
+        <section id="content-home" class="home">
+
+          <!-- <div class="draft-config"> -->
+            <div class="select-wrap">
+              <div id="numberOfTeams"><h3>Number of teams</h3></div>
+              <div id="numberOfTeams">
+                <select id="teamCount" name="teamCount">
+                  <option value="4" selected="selected">4</option>
+                  <option value="6">6</option>
+                  <option value="8">8</option>
+                  <option value="10">10</option>
+                  <option value="12">12</option>
+                  <option value="14">14</option>
+                  <option value="16">16</option>
+                </select>
+              </div>
+            </div>
+            <div id="numberOfTeams"><h4>Draft Position</h4></div>
+              <div id="numberOfTeams" class="select-wrap">
+                <select id="userPos" name="userPos">
+                  <option value="1">1st</option>
+                  <option value="2">2nd</option>
+                  <option value="3">3rd</option>
+                  <option value="4">4th</option>
+                  <option value="5">5th</option>
+                  <option value="6">6th</option>
+                  <option value="7">7th</option>
+                  <option value="8">8th</option>
+                  <option value="9">9th</option>
+                  <option value="10">10th</option>
+                  <option value="11">11th</option>
+                  <option value="12">12th</option>
+                  <option value="13">13th</option>
+                  <option value="14">14th</option>
+                  <option value="15">15th</option>
+                  <option value="16">16th</option>
+                </select>
+
+                <button id="random-btn" type="button">Randomize</button>
+              </div>
+              <div class="roster-position" title="Roster Position"></div>
+              <div id="startDraftButton">
+                <button type="button" id="startDraft"><a href='/draft'>Start Draft!</a></button>
+              </div>
+        </section>
+        <section id="content-draft" class="draft">
+          <nav id="draft-nav" class="main-nav">
+            <ul>
+              <li id="draft">Draft</li>
+              <li id="teams">Teams</li>
+            </ul>
+          </nav>
+          <div class="draft-tab">
+            <p id="intro">Click the draft button next to the player that you want to draft! No "take backs"!!</p>
+          </div>
+
+          <div class="teams-tab">
+              <select id="blank"></select>
+              <section id="team-list"></section>
+          </div>
+
+        </section>
+    </div>
+
+    <script type="text/javascript" src="/scripts/appFunctions.js"></script>
+    <script type="text/javascript" src="/scripts/app.js"></script>
+    <script type="text/javascript" src="/scripts/routes.js"></script>
+    <script src="/images"></script>
+  </body>
+</html>

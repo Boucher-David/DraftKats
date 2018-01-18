@@ -1,0 +1,56 @@
+
+.schoolImage {
+  max-width: 70%;
+}
+
+.select-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+
+/* Teams Page */
+.team- {
+  height: 100%;
+  max-width: 100%;
+  max-height: inherit;
+}
+
+.teams-tab {
+  max-width: 100%;
+  padding-top: 0.5%;
+  min-height: 1000000px;
+  height: 100%;
+  width: 100%;
+  font-size: 20px;
+  text-align: center;
+}
+
+#blank {
+  color: white;
+  font-size: 20px;
+  background-color: gray;
+  margin-top: 2%;
+}
+
+#team-list {
+ background: transparent;
+ border: none;
+ color: white;
+ font-size: 20px;
+ height: 5%;
+ padding: .2%;
+ width: 100%;
+}
+
+/* Logo */
+#DraftKats{
+  text-decoration: none;
+  color: white;
+  font-size: 90px;
+}
+
+#DraftKats a:link, a:visited {
+    color: white;
+    text-decoration: none;
+}

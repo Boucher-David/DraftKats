@@ -1,0 +1,100 @@
+body {
+  width: 100%;
+  height: 100%;
+  font-family: 'Roboto', sans-serif;
+  margin: 0 auto;
+  background-color: #334c99
+}
+
+#random-btn {
+  background: #1E90FF;
+  border: none;
+  color: white;
+  padding: 15px 20px;
+  border-radius: 4px;
+  font-family: 'Roboto Condensed', sans-serif;
+  text-align: center;
+  text-transform: uppercase;
+  text-decoration: none;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+#content-home {
+  width: 100%;
+  height: 100%;
+}
+
+#DraftKats {
+  background-image: url(/images/football-380388_1920.jpg);
+}
+
+#draftPlayer {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 25px 30px;
+  border-radius: 4px;
+  text-align: center;
+  font-family: 'Roboto Condensed', sans-serif;
+  text-transform: uppercase;
+  text-decoration: none;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  float: inherit;
+}
+
+#draft-nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+    top: 0;
+    width: 100%;
+    font-size: 30px;
+}
+
+#draft-nav li {
+    float: left;
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+
+}
+
+#draft-nav li:hover:not(.active) {
+    background-color: #111;
+}
+
+#draft-nav li .active {
+    background-color: #4CAF50;
+}
+
+.draft-tab {
+  padding-top: 0em;
+  font-size: 20px;
+  text-align: center;
+}
+
+.draft-tab div {
+  width: 100%;
+  display: inline-block;
+  font-size: 25px;
+  padding: 0em 2em 0em 1.5em;
+  height: 0px;
+
+}
+
+.draft-tab div article {
+  display: inline-block;
+  padding-top: .5em;
+  padding-left: 2em;
+  padding-right: 2em;
+  padding-bottom: 0em;
+#startDraft:link {
+  text-decoration: none;
+}
