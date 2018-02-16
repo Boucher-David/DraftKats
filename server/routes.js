@@ -4,11 +4,6 @@ const path = require('path');
 
 app.use(express.static(path.join(__dirname, '/../bundle')));
 
-
-app.get('*', function(req, res) {
-    res.sendFile(__dirname + './index.html');
-});
-
 // Route creator is responsible for testing + documenting each route thoroughly. Document and test any modules you create on the route, too. 
 
 // POST /login/create
