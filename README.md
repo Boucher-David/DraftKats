@@ -1,5 +1,7 @@
 # Guide
 
+** Create all branches off 'development'. Merge PRs into development, make sure all is ready, then merge development into master. ** Work does it like this so it will be good simulation.
+
 Make sure to run 'npm install' and create a .env. Then run the following, based upon your needs: 
 
 "npm run dev-backend"     -> starts node.js server using nodemon. Use this for all server-side development.
