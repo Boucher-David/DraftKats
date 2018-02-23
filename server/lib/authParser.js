@@ -1,7 +1,7 @@
 'use strict';
 
-let _basic =  (req, res, next) => {
-    let base64 = authType[1];
+let _basic = (auth, req, res, next) => {
+    let base64 = auth[1];
     let base64Buffer = new Buffer(base64, 'base64');
     
     let stringHeader = base64Buffer.toString();
@@ -11,11 +11,11 @@ let _basic =  (req, res, next) => {
     return;
 }
 
-let _bearer = (req, res, next) => {
-    return ;
+let _bearer = (auth, req, res, next) => {
+    return;
 }
 
-module.exports = (req, res, next) => {
+module.exports = async (req, res, next) => {
     req.body = req.body || {};
     req.body.auth = req.body.auth || {};
     req.body.auth = {
@@ -24,12 +24,11 @@ module.exports = (req, res, next) => {
 
     let authHeader = req.headers.authorization || false;
     if (!authHeader) return next();
-    let authType;
 
-    authType = authHeader.split(' ');
+    let authType = authHeader.split (' ');
 
-    if (authType[0] === 'Basic') _basic(req, res, next);
-    if (authType[0] === 'Bearer') _bearer (req, res, next);
+    if (authType[0] === 'Basic') _basic(authType, req, res, next);
+    if (authType[0] === 'Bearer') _bearer (authType, req, res, next);
 
 
     return next();
