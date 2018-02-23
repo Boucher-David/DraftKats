@@ -1,14 +1,27 @@
 const express = require('express');
 const app = module.exports = express.Router();
 const path = require('path');
+const cors = require('cors');
+
+const User = require('./models/User.js');
+const awaitIFY = require('./lib/awaitIFY.js');
+
+const authParser = require('./lib/authParser.js');
+
+app.use(cors());
+app.use(authParser);
 
 app.use(express.static(path.join(__dirname, '/../bundle')));
+
 
 // Route creator is responsible for testing + documenting each route thoroughly. Document and test any modules you create on the route, too. 
 
 // POST /login/create
     //User wants to create an account for storing draft history. Save to DB. Create User model with a uuid field, with a  randomly generated uuid() value on save, as well as other fields you deem necessary. 
-    
+app.post('/login/signup', async (req, res, next) => {
+    res.send(req.body)
+});
+
 // POST login/login
     //User enters login information. Generate JWT. Create middleware for parsing JWT tokens that we can use in other routes. Use uuid field as token input, not mongo's _id.
     
