@@ -10,6 +10,11 @@ const authParser = require('./lib/authParser.js');
 
 app.use(cors());
 app.use(authParser);
+app.use((req, res, next) => {
+    res.body = res.body || {};
+    res.body.kats = res.body.kats || {};
+    return next();
+});
 
 app.use(express.static(path.join(__dirname, '/../bundle')));
 
@@ -19,7 +24,33 @@ app.use(express.static(path.join(__dirname, '/../bundle')));
 // POST /login/create
     //User wants to create an account for storing draft history. Save to DB. Create User model with a uuid field, with a  randomly generated uuid() value on save, as well as other fields you deem necessary. 
 app.post('/login/signup', async (req, res, next) => {
-    res.send(req.body)
+    res.body.kats = {
+        created: false
+    }
+
+    if (req.body.auth.credentials.length !== 2) {
+        res.body.kats.message = "Please provide a username and password.";
+        res.send(res.body);
+        return next();
+    }
+
+    let [err, user] = await awaitIFY(User.findOne({username: req.body.auth.credentials[0]}));
+
+    if (user === null) {
+        let newUser = new User();
+        newUser._save(newUser, req.body.auth.credentials).then(result => {
+            res.body.kats.created = true;
+            res.send(res.body);
+            return next();
+        });
+
+    } else {
+        res.body.kats.message = "User already exists.";
+        res.send(res.body);
+        return next();
+    }
+
+
 });
 
 // POST login/login

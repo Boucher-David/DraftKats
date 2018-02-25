@@ -14,13 +14,12 @@ let http = null;
 let isRunning = null;
 
 module.exports = {
-   start: (port) => {
+   start: () => {
        if (isRunning) return "Server is already running";
-       http = app.listen(port, () => {
+       if (process.env.BACKEND_PORT === undefined) return console.log("You need to create a .env file like the guide says.");
+       http = app.listen(process.env.BACKEND_PORT, () => {
+           console.log(`Server is running on port ${process.env.BACKEND_PORT}`);
            isRunning = true;
-           console.log(`Server is running in port: ${port}`);
-           console.log('Did you run "npm run dev-db" to ensure your mongdb database is running?');
-           if(port === 3000) console.log('Did you create an ENV file like the guide says? If not this will not work.');
        });
    },
    stop: () => {

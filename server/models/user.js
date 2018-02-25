@@ -1,24 +1,23 @@
 const Mongoose = require('mongoose');
 
 const bcrypt = require('bluebird').promisifyAll(require('bcrypt'));
-
+const jwt = require('jsonwebtoken');
 var randomstring = require("randomstring");
 
 const User = new Mongoose.Schema({
-    username: {type: String, required: true, unique: true},
-    password: {type: String, required: true, unique: true},
+    username: {type: String, unique: true},
+    password: {type: String, unique: true},
     user_id: {type: String, unique: true}
 });
 
-User.methods._save = (username, password) => {
-    return new Promise((resolve, reject) => {
-        bcrypt.hashAsync(password, 15).then(hash => {
-            this.password = hash;
-            this.username = username;
-            this.user_id = randomstring.generate({length: 100});
-            User.save(this).then(success => resolve(success)).catch(failure => reject(failure));
+User.methods._save = async (schema, credentials) => {
+    return bcrypt.hashAsync(credentials[1], 15).then(hash => {
+        schema.username = credentials[0];
+        schema.password = hash;
+        schema.user_id = randomstring.generate({length: 100});
+        return schema.save().then(saved => {
+            return saved;
         });
-
     });
 }
 
@@ -27,5 +26,17 @@ User.methods.compare = (password, hash) => {
         return res;
     });
 }
+
+User.methods.parseJWT = async (token) => {
+    return new Promise((resolve, reject) => {
+        let verified = jwt.verify(token, process.env.SECRET);
+        return (verified) ? resolve(verified) : reject(false);
+    });
+}
+
+User.methods.generateToken = async () => {
+    return jwt.sign({user_id: this.user_id},process.env.SECRET);
+}
+
 
 module.exports = Mongoose.model('User', User);

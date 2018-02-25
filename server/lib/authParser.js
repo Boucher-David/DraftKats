@@ -1,8 +1,10 @@
 'use strict';
 
+const User = require('../models/User');
+
 let _basic = (auth, req, res, next) => {
-    let base64 = auth[1];
-    let base64Buffer = new Buffer(base64, 'base64');
+
+    let base64Buffer = new Buffer(auth, 'base64');
     
     let stringHeader = base64Buffer.toString();
 
@@ -11,7 +13,9 @@ let _basic = (auth, req, res, next) => {
     return;
 }
 
-let _bearer = (auth, req, res, next) => {
+let _bearer = async (auth, req, res, next) => {
+    let verified = await User.parseJWT(auth);
+    console.log('verified JWT: ',verified);
     return;
 }
 
@@ -27,9 +31,8 @@ module.exports = async (req, res, next) => {
 
     let authType = authHeader.split (' ');
 
-    if (authType[0] === 'Basic') _basic(authType, req, res, next);
-    if (authType[0] === 'Bearer') _bearer (authType, req, res, next);
-
+    if (authType[0] === 'Basic') _basic(authType[1], req, res, next);
+    if (authType[0] === 'Bearer') _bearer(authType[1], req, res, next);
 
     return next();
 };

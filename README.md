@@ -20,6 +20,8 @@ WEBPACK_PORT=3000
 
 MONGODB_URI=
 
+SECRET= 
+
 These ports can be anything you want, just different from each other (and not the mongodb port 27017).
 
 # Mongoose Trouble?
@@ -42,13 +44,17 @@ Basketball: https://www.fantasybasketballnerd.com/service/draft-rankings
 GET '/draft/:sport'
 ```
 Needs: soccer, football, baseball, or basketball as parameter
-Responds with: [{name: name, team: team, adp: adp, position: position},{name: name, team: team, adp: adp, position: position},{name: name, team: team, adp: adp, position: position}]
+Responds with: [
+    {name: name, team: team, adp: adp, position: position},
+    {name: name, team: team, adp: adp, position: position},
+    {name: name, team: team, adp: adp, position: position}
+]
 ```
 
 POST 'login/create'
 ```
 Needs: Basic auth. username:password
-Responds with: body.user = {
+Responds with: body.kats = {
     created: true or false,
     message: reason for false
 }
