@@ -10,12 +10,17 @@ let _basic = (auth, req, res, next) => {
 
     let authArray = stringHeader.split(':');
     req.body.auth.credentials = authArray;
+    req.body.auth.type = 'Basic';
     return;
 }
 
 let _bearer = async (auth, req, res, next) => {
     let verified = await User.parseJWT(auth);
     console.log('verified JWT: ',verified);
+
+
+    req.body.auth.verified = verified;
+    req.body.auth.type = 'Bearer';
     return;
 }
 

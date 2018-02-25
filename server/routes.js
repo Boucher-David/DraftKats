@@ -24,14 +24,14 @@ app.use(express.static(path.join(__dirname, '/../bundle')));
 // POST /login/create
     //User wants to create an account for storing draft history. Save to DB. Create User model with a uuid field, with a  randomly generated uuid() value on save, as well as other fields you deem necessary. 
 app.post('/login/signup', async (req, res, next) => {
-    res.body.kats = {
-        created: false
-    }
-
-    if (req.body.auth.credentials.length !== 2) {
-        res.body.kats.message = "Please provide a username and password.";
+    if (!req.body.auth.credentials || req.body.auth.credentials.length !== 2 || req.body.auth.credentials.type === 'Bearer') {
+        res.body.kats.message = "Please provide a username and password. Basic authentication required.";
         res.send(res.body);
         return next();
+    }
+
+    res.body.kats = {
+        created: false
     }
 
     let [err, user] = await awaitIFY(User.findOne({username: req.body.auth.credentials[0]}));

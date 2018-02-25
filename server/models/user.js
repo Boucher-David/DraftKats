@@ -4,6 +4,8 @@ const bcrypt = require('bluebird').promisifyAll(require('bcrypt'));
 const jwt = require('jsonwebtoken');
 var randomstring = require("randomstring");
 
+const awaitIFY = require('../lib/awaitIFY');
+
 const User = new Mongoose.Schema({
     username: {type: String, unique: true},
     password: {type: String, unique: true},
@@ -29,7 +31,9 @@ User.methods.compare = (password, hash) => {
 
 User.methods.parseJWT = async (token) => {
     return new Promise((resolve, reject) => {
-        let verified = jwt.verify(token, process.env.SECRET);
+        let [err, token] = await awaitIFY(jwt.verify(token, process.env.SECRET));
+        if (err) reject(false);
+        // compare token's code with databse for base. resolve true if use exists and token is correct.
         return (verified) ? resolve(verified) : reject(false);
     });
 }
