@@ -6,6 +6,7 @@ const cors = require('cors');
 const User = require('./models/User.js');
 const newUser = new User();
 const awaitIFY = require('./lib/awaitIFY.js');
+var randomstring = require("randomstring");
 
 const authParser = require('./lib/authParser.js');
 
@@ -80,10 +81,28 @@ app.post('/login/signin', async (req, res, next) => {
     res.send(res.body);
     return next();
 
-
-
 });
 
+app.get('/login/signout', async (req, res, next) => {
+    res.body.kats = {
+        loggedOut: false
+    }
+
+    if (req.body.auth.type === 'Basic') return res.send(res.body);
+    if (!req.body.auth.credentials) return res.send(res.body);
+    let [err, user] = await awaitIFY(User.findOne({user_id: req.body.auth.token}));
+
+    if (user === null) {
+        res.send();
+        return next();
+    } else {
+        [err, updated] = await awaitIFY(User.findOneAndUpdate({user_id: user.user_id}, {user_id: randomstring.generate({length: 100})}, {new: true}));
+        if (updated) res.body.kats.loggedOut = true;
+        res.send();
+        return next();
+    }
+
+});
 
 // POST login/login
     //User enters login information. Generate JWT. Create middleware for parsing JWT tokens that we can use in other routes. Use uuid field as token input, not mongo's _id.

@@ -1,6 +1,7 @@
 'use strict';
 
 const User = require('../models/User');
+const newUser = new User();
 
 let _basic = (auth, req, res, next) => {
 
@@ -18,13 +19,16 @@ let _basic = (auth, req, res, next) => {
 }
 
 let _bearer = async (auth, req, res, next) => {
-    let verified = await User.parseJWT(auth);
-    console.log('verified JWT: ',verified);
+    let token = await newUser.parseJWT(auth);
+    if (token) {
+        req.body.auth = {
+            token: token.user_id,
+            credentials: true,
+            type: 'Bearer'
+        }
+    }
 
-
-    req.body.auth.verified = verified;
-    req.body.auth.type = 'Bearer';
-    return;
+    return next();
 }
 
 module.exports = async (req, res, next) => {
