@@ -29,14 +29,14 @@ User.methods.compare = (password, hash) => {
     });
 }
 
-User.methods.parseJWT = async (token) => {
-    return new Promise((resolve, reject) => {
-        let [err, token] = await awaitIFY(jwt.verify(token, process.env.SECRET));
-        if (err) reject(false);
-        // compare token's code with databse for base. resolve true if use exists and token is correct.
-        return (verified) ? resolve(verified) : reject(false);
-    });
-}
+// User.methods.parseJWT = async (token) => {
+//     return new Promise((resolve, reject) => {
+//         let [err, token] = await awaitIFY(jwt.verify(token, process.env.SECRET));
+//         if (err) reject(false);
+//         // compare token's code with databse for base. resolve true if use exists and token is correct.
+//         return (verified) ? resolve(verified) : reject(false);
+//     });
+// }
 
 User.methods.generateToken = async () => {
     return jwt.sign({user_id: this.user_id},process.env.SECRET);

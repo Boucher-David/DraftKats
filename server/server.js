@@ -20,15 +20,18 @@ module.exports = {
        http = app.listen(process.env.BACKEND_PORT, () => {
            console.log(`Server is running on port ${process.env.BACKEND_PORT}`);
            isRunning = true;
+           return;
        });
+
    },
-   stop: () => {
-       if (!isRunning) return "Server is already shut down";
-       if (!http) return "Invalid Server";
-       http.close(() => {
-           http = null;
-           isRunning = false;
-           console.log('Server shut down.');
-       });
+   stop: async () => {
+        return new Promise(resolve => {
+            http.close(() => {
+                isRunning = false;
+                http = null;
+                return resolve(isRunning);
+            });
+        });
+
    }
 }
