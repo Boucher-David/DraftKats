@@ -10,6 +10,9 @@ var randomstring = require("randomstring");
 
 const authParser = require('./lib/authParser.js');
 
+app.use((err, req, res, next) => {
+    if (err) return res.sendStatus(400);
+});
 app.use(cors());
 app.use(authParser);
 app.use((req, res, next) => {
@@ -102,6 +105,10 @@ app.get('/login/signout', async (req, res, next) => {
         return next();
     }
 
+});
+
+app.use('*', (req, res, next) => {
+    res.redirect('/');
 });
 
 // POST login/login
