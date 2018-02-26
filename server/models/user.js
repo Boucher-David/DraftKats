@@ -13,6 +13,7 @@ const User = new Mongoose.Schema({
 });
 
 User.methods._save = async (schema, credentials) => {
+
     return bcrypt.hashAsync(credentials[1], 15).then(hash => {
         schema.username = credentials[0];
         schema.password = hash;

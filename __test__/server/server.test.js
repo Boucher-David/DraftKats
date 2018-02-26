@@ -12,9 +12,7 @@ beforeAll(done => {
 afterAll(done => {
     server.stop();
     done();
-})
-
-
+});
 
 test('Test that server responds with 200 on /, showing server is live', async (done) =>{ 
     request.get(`localhost:${process.env.BACKEND_PORT}`).then(response => {
