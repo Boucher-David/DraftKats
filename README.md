@@ -63,8 +63,8 @@ Responds with: body.kats = {
 POST 'login/login'
 ```
 Needs: Basic auth. username:password
-Responds with: body.user = {
-    authenticated: true or false,
+Responds with: body.kats = {
+    login: true or false,
     token: token if authenticated,
     message: reason for false
 }
