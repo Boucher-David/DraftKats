@@ -4,6 +4,7 @@ const path = require('path');
 const cors = require('cors');
 
 const User = require('./models/User.js');
+const newUser = new User();
 const awaitIFY = require('./lib/awaitIFY.js');
 
 const authParser = require('./lib/authParser.js');
@@ -37,7 +38,6 @@ app.post('/login/signup', async (req, res, next) => {
     let [err, user] = await awaitIFY(User.findOne({username: req.body.auth.credentials[0]}));
 
     if (user === null) {
-        let newUser = new User();
         newUser._save(newUser, req.body.auth.credentials).then(result => {
             res.body.kats.created = true;
             res.send(res.body);
@@ -49,6 +49,37 @@ app.post('/login/signup', async (req, res, next) => {
         res.send(res.body);
         return next();
     }
+
+});
+
+app.post('/login/signin', async (req, res, next) => {
+    let err, user, match;
+    if (!req.body.auth.credentials) {
+        res.body.kats.message = "Please provide a username and password. Basic authentication required.";
+        res.send(res.body);
+        return next();
+    };
+    res.body.kats = {
+        login: false
+    };
+    
+    [err, user] = await awaitIFY(User.findOne({username: req.body.auth.credentials[0]}).then(exists => {
+        return (exists) ? exists : null;
+    }));
+
+    if (user === null) return res.send(res.body);
+    [err, match] = await awaitIFY(newUser.compare(req.body.auth.credentials[1], user.password));
+    
+    if (err || !match) return res.send(res.body);
+    let token = await awaitIFY(user.generateToken(user));
+
+    res.body.kats = {
+        login: true,
+        token: token[1]
+    }
+    res.send(res.body);
+    return next();
+
 
 
 });

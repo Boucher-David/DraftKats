@@ -39,8 +39,8 @@ User.methods.compare = (password, hash) => {
 //     });
 // }
 
-User.methods.generateToken = async () => {
-    return jwt.sign({user_id: this.user_id},process.env.SECRET);
+User.methods.generateToken = async (user) => {
+    return jwt.sign({user_id: user.user_id},process.env.SECRET);
 }
 
 
