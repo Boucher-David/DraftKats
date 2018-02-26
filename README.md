@@ -83,9 +83,8 @@ Invalidates token.
 POST 'login/signout'
 ```
 Needs: Bearer auth: jwt token
-Responds with: body.user = {
-    signedOut: true or false,
-    message: reason for false
+Responds with: body.kats = {
+    loggedOut: true or false,
 }
 Invalidates token.
 ```
