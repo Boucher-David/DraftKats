@@ -9,6 +9,9 @@ let _basic = (auth, req, res, next) => {
     let stringHeader = base64Buffer.toString();
 
     let authArray = stringHeader.split(':');
+    if (authArray.length > 2 || authArray[0] === '' || authArray[1] === '' || authArray[2] === '') {
+        return next();
+    }
     req.body.auth.credentials = authArray;
     req.body.auth.type = 'Basic';
     return;

@@ -26,6 +26,7 @@ module.exports = {
    },
    stop: async () => {
         return new Promise(resolve => {
+            if (http === null || !isRunning) return resolve(isRunning);
             http.close(() => {
                 isRunning = false;
                 http = null;

@@ -50,3 +50,12 @@ test('Test that we create a user correctly' , async (done) => {
     expect(response.body.kats.created).toEqual(true);
     done();
 });
+
+
+
+test('Test that we cannot duplicate a user', async (done) => {
+    let response = await superagent.post(URL + '/login/signup').auth(username, password);
+    expect(response.body.kats.created).toEqual(false);
+    expect(response.body.kats.message).toEqual('User already exists.');
+    done();
+});
