@@ -6,7 +6,7 @@ const superagent = require('superagent');
 const User = require('../../server/models/User.js');
 let newUser = new User();
 
-let URL = `localhost:${process.env.BACKEND_PORT}`;
+let URL = (process.env.NODE_ENV === 'production') ? 'draftkats.herokuapp.com' : `localhost:${process.env.BACKEND_PORT}`;
 
 let username = 'david';
 let password = 'password';
