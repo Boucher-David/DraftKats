@@ -2,6 +2,7 @@ const express = require('express');
 const app = module.exports = express.Router();
 const path = require('path');
 const cors = require('cors');
+const bcrypt = require('bluebird').promisifyAll(require('bcrypt'));
 
 const User = require('./models/User.js');
 const newUser = new User();
@@ -91,11 +92,35 @@ let updated;
 
     return (updated) ? res.json({loggedOut: true}) : res.json({loggedOutfalse}); 
 
+});
 
+app.post('/login/update', async (req, res, next) => {
+    if (req.body.auth.credentials.length !== 3) return res.json({
+        updated: false,
+        message: 'Please make sure to send username, password, and new password as basic auth'
+    });
+ 
+    [err, user] = await awaitIFY(User.findOne({username: req.body.auth.credentials[0]}));
+    if (!user) return res.json({
+        updated: false
+    });
+
+    [err, comparePassword] = await awaitIFY(newUser.compare(req.body.auth.credentials[1], user.password));
+    if (!comparePassword) return res.json({updated: false});
+
+    [err, newHash] = await awaitIFY(bcrypt.hashAsync(req.body.auth.credentials[2], 15));
+
+    [err, updated] = await awaitIFY(User.findOneAndUpdate({user_id: user.user_id},{password: newHash},{new: true}));
+
+
+    return res.json({
+        updated: true,
+    });
 
 });
 
-app.use('*', (req, res, next) => {
+app.use('*', (req, res, next) => {    
+
     res.redirect('/');
 });
 
