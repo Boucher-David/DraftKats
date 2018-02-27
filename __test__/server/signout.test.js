@@ -31,23 +31,25 @@ afterAll(done => {
 
 test('Test signin and save the token we receive', async (done) => {
     let response = await superagent.post(URL + '/login/signin').auth('david', 'password');
-    token = response.body.kats.token;
-    expect(response.body.kats.login).toEqual(true);
+
+    token = response.body.token;
+    expect(response.body.login).toEqual(true);
     done();
 });
 
 test('Test sending no bearer token', async (done) => {
     let response = await superagent.get(URL + '/login/signout');
-
-    expect(response.body.kats.loggedOut).toEqual(false);
+    expect(response.body.loggedOut).toEqual(false);
     done();
 });
 
 test('Test sending the wrong bearer token', async (done) => {
     let response = await superagent.get(URL + '/login/signout').set('Authorization', `Bearer abc123`);
 
-    expect(response.body.kats.loggedOut).toEqual(false);
+    expect(response.body.loggedOut).toEqual(false);
 
     done();
 });
+
+
 

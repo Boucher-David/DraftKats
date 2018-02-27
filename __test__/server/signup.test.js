@@ -32,7 +32,8 @@ test('Test user does not already exist', done => {
 
 test('Test that user isnt created if we fail to pass credentials', async (done) => {
     let response = await superagent.post(URL + '/login/signup');
-    expect(response.body.kats.message).toEqual('Please provide a username and password. Basic authentication required.');
+
+    expect(response.body.message).toEqual('Please provide a username and password. Basic authentication required.');
 
     done();
 
@@ -40,14 +41,14 @@ test('Test that user isnt created if we fail to pass credentials', async (done) 
 
 test('Test that user isnt created if we pass only one credential', async (done) => {
     let response = await superagent.post(URL + '/login/signup').auth(username, '');
-    expect(response.body.kats.message).toEqual('Please provide a username and password. Basic authentication required.');
+    expect(response.body.message).toEqual('Please provide a username and password. Basic authentication required.');
 
     done();
 });
 
 test('Test that we create a user correctly' , async (done) => {
     let response = await superagent.post(URL + '/login/signup').auth(username, password);
-    expect(response.body.kats.created).toEqual(true);
+    expect(response.body.created).toEqual(true);
     done();
 });
 
@@ -55,7 +56,7 @@ test('Test that we create a user correctly' , async (done) => {
 
 test('Test that we cannot duplicate a user', async (done) => {
     let response = await superagent.post(URL + '/login/signup').auth(username, password);
-    expect(response.body.kats.created).toEqual(false);
-    expect(response.body.kats.message).toEqual('User already exists.');
+    expect(response.body.created).toEqual(false);
+    expect(response.body.message).toEqual('User already exists.');
     done();
 });
