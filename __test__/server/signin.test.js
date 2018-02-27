@@ -30,13 +30,13 @@ afterAll(done => {
 
 test('Test that login doesnt work if we send wrong credentials', async (done) => {
     let response = await superagent.post(URL + '/login/signin').auth('david', 'wrongPassword');
-    expect(response.body.kats.login).toEqual(false);
+    expect(response.body.login).toEqual(false);
 
     done();
 });
 
 test('Test that correct credentials give us a true for login and a token', async (done) => {
     let response = await superagent.post(URL + '/login/signin').auth('david', 'password');
-    expect(response.body.kats.login).toEqual(true);
+    expect(response.body.login).toEqual(true);
     done();
 });

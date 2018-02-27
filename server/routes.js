@@ -29,81 +29,69 @@ app.use(express.static(path.join(__dirname, '/../bundle')));
 // POST /login/create
     //User wants to create an account for storing draft history. Save to DB. Create User model with a uuid field, with a  randomly generated uuid() value on save, as well as other fields you deem necessary. 
 app.post('/login/signup', async (req, res, next) => {
-    if (!req.body.auth.credentials) {
-        res.body.kats.message = "Please provide a username and password. Basic authentication required.";
-        res.send(res.body);
-        return next();
-    }
 
-    res.body.kats = {
-        created: false
-    }
+
 
     let [err, user] = await awaitIFY(User.findOne({username: req.body.auth.credentials[0]}));
 
     if (user === null) {
         newUser._save(newUser, req.body.auth.credentials).then(result => {
-            res.body.kats.created = true;
-            res.send(res.body);
-            return next();
+
+            return res.send({
+                created: true
+            });
         });
 
     } else {
-        res.body.kats.message = "User already exists.";
-        res.send(res.body);
-        return next();
+
+        return res.json({
+            created: false,
+            message: 'User already exists.'
+        });
+
     }
 
 });
 
 app.post('/login/signin', async (req, res, next) => {
     let err, user, match;
-    if (!req.body.auth.credentials) {
-        res.body.kats.message = "Please provide a username and password. Basic authentication required.";
-        res.send(res.body);
-        return next();
-    };
-    res.body.kats = {
-        login: false
-    };
     
     [err, user] = await awaitIFY(User.findOne({username: req.body.auth.credentials[0]}).then(exists => {
+
         return (exists) ? exists : null;
     }));
 
-    if (user === null) return res.send(res.body);
+    if (user === null) return res.json({
+        login: false
+    });
+
     [err, match] = await awaitIFY(newUser.compare(req.body.auth.credentials[1], user.password));
     
-    if (err || !match) return res.send(res.body);
+    if (err || !match) return res.json({login:false});
     let token = await awaitIFY(user.generateToken(user));
-
-    res.body.kats = {
+    return res.json({
         login: true,
         token: token[1]
-    }
-    res.send(res.body);
-    return next();
+    });
 
 });
 
 app.get('/login/signout', async (req, res, next) => {
-    res.body.kats = {
-        loggedOut: false
-    }
+let updated;
+    if (req.body.auth.type === 'Basic' || !req.body.auth.credentials) return res.json({loggedOut: false});
 
-    if (req.body.auth.type === 'Basic') return res.send(res.body);
-    if (!req.body.auth.credentials) return res.send(res.body);
     let [err, user] = await awaitIFY(User.findOne({user_id: req.body.auth.token}));
 
-    if (user === null) {
-        res.send();
-        return next();
-    } else {
-        [err, updated] = await awaitIFY(User.findOneAndUpdate({user_id: user.user_id}, {user_id: randomstring.generate({length: 100})}, {new: true}));
-        if (updated) res.body.kats.loggedOut = true;
-        res.send();
-        return next();
-    }
+    if (user === null) return res.json({
+        loggedOut: false
+    });
+
+    
+    [err, updated] = await awaitIFY(User.findOneAndUpdate({user_id: user.user_id}, {user_id: randomstring.generate({length: 100})}, {new: true}));
+
+    return (updated) ? res.json({loggedOut: true}) : res.json({loggedOutfalse}); 
+
+
 
 });
 

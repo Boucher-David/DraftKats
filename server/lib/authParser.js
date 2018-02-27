@@ -10,11 +10,13 @@ let _basic = (auth, req, res, next) => {
     let stringHeader = base64Buffer.toString();
 
     let authArray = stringHeader.split(':');
-    if (authArray.length > 2 || authArray[0] === '' || authArray[1] === '' || authArray[2] === '') {
-        return next();
-    }
+
+    if (authArray.length > 3 || authArray[0] === '' || authArray[1] === '' || authArray[2] === '') return res.json({
+        message: "Please provide a username and password. Basic authentication required."
+    });
     req.body.auth.credentials = authArray;
     req.body.auth.type = 'Basic';
+
     return;
 }
 
@@ -26,9 +28,15 @@ let _bearer = async (auth, req, res, next) => {
             credentials: true,
             type: 'Bearer'
         }
+        return next();
+    } else {
+        req.body.auth = {
+            credentials: false,
+            type: 'Bearer',
+            token: false
+        }
     }
 
-    return next();
 }
 
 module.exports = async (req, res, next) => {
@@ -39,7 +47,9 @@ module.exports = async (req, res, next) => {
     }
 
     let authHeader = req.headers.authorization || false;
-    if (!authHeader) return next();
+    if (!authHeader) return res.json({
+        message: "Please provide a username and password. Basic authentication required."
+    });
 
     let authType = authHeader.split (' ');
 

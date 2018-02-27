@@ -63,7 +63,7 @@ Responds with: body.kats = {
 POST 'login/login'
 ```
 Needs: Basic auth. username:password
-Responds with: body.kats = {
+Responds with: body = {
     login: true or false,
     token: token if authenticated,
     message: reason for false
@@ -73,7 +73,7 @@ Responds with: body.kats = {
 PUT 'login/update'
 ```
 Needs: Basic auth: username:oldPassword:newPassword
-Responds with: body.user = {
+Responds with: body = {
     updated: true or false,
     message: reason for false
 }
@@ -83,7 +83,7 @@ Invalidates token.
 POST 'login/signout'
 ```
 Needs: Bearer auth: jwt token
-Responds with: body.kats = {
+Responds with: body = {
     loggedOut: true or false,
 }
 Invalidates token.
