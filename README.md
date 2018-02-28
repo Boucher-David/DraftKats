@@ -70,7 +70,7 @@ Responds with: body = {
 }
 ```
 
-PUT 'login/update'
+POST 'login/update'
 ```
 Needs: Basic auth: username:oldPassword:newPassword
 Responds with: body = {
@@ -80,32 +80,30 @@ Responds with: body = {
 Invalidates token.
 ```
 
-POST 'login/signout'
+GET 'login/signout/JWTTokenHere'
 ```
-Needs: Bearer auth: jwt token
+Needs: jwt token in url
 Responds with: body = {
     loggedOut: true or false,
 }
 Invalidates token.
 ```
 
-POST 'history/:sport'
+POST 'history/save/:sport/:JWTTokenHere'
 ```
-Needs: Bearer auth: jwt token.
-Needs: [{name: name, team: team, adp: adp, position: position},{name: name, team: team, adp: adp, position: position},{name: name, team: team, adp: adp, position: position}]
+Needs: JWT Token in url, sport in url
+Needs: post an object {team: [Array of players]}
 Responds with: body.history = {
-    saved: true or false,
-    message: reason for false
+    saved: true or false
 }
 ```
 
-GET 'history/:sport'
+GET 'history/get/:sport/:JWTTokenHere'
 ```
 Needs: soccer, football, baseball, or basketball as parameter
-Needs: Bearer auth. jwt token.
+Needs: jwt token in url
 Responds with: body.history = {
-    success: true or false,
-    message: reason for false,
-    history: [[{name: name, team: team, adp: adp, position: position}],[{name: name, team: team, adp: adp, position: position}],[{name: name, team: team, adp: adp, position: position}]]
+    searched: true or false,
+    list: array of saved teams if searched is true
 }
 ```

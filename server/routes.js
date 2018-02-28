@@ -156,23 +156,6 @@ app.post('/login/update', async (req, res, next) => {
 
 });
 
-app.get('/history/get/:sport', async (req, res, next) => {
-
-    if (!req.body.auth.credentials) return res.json({
-        login: false
-    });
-    let [err, user] = await awaitIFY(User.findOne({user_id: req.body.auth.token}));
-
-    if (!user) return res.json({
-        login: false
-    });
-
-    // search history db for user_id
-    // search history db for sport    
-    
-    return res.json(req.body.auth);
-
-});
 
 app.post('/history/save/:sport/:token', async (req, res, next) =>{
     let saved;
@@ -185,7 +168,7 @@ app.post('/history/save/:sport/:token', async (req, res, next) =>{
         saved: false
     });
 
-    if (req.body.team === '[]') return res.json({
+    if (req.body.team.length < 1) return res.json({
         saved: false
     });
 
@@ -208,6 +191,45 @@ app.post('/history/save/:sport/:token', async (req, res, next) =>{
     }) : res.json({
         saved: false
     });
+
+});
+
+app.get('/history/get/:sport/:token', async (req, res, next) => {
+    let sportlist;
+    if (sports.indexOf(req.params.sport) === -1) return res.json({
+        searched: false
+    });
+
+    let token = await newUser.parseJWT(req.params.token);
+    if (!token) return res.json({
+        searched: false
+    });
+
+    if (req.body.team === '[]') return res.json({
+        searched: false
+    });
+
+    let [err, user] = await awaitIFY(User.findOne({user_id: token.user_id}));
+
+    if (!user) return res.json({
+        searched: false
+    });
+
+    [err, sportlist] = await awaitIFY(History.find({user_mongoose_id: user._id}));
+
+    let list = sportlist.map(t => {
+        if (t.sport === req.params.sport) return t.team[0];
+    });
+
+    if (!sportlist) return res.json({
+        searched: false
+    });
+
+    return res.json({
+        searched: true,
+        list
+    });
+
 
 });
 
