@@ -34,8 +34,8 @@ test('Test that correct credentials give us a true for login and a token', async
 });
 
 test('URL', async (done) => {
-    let response = await superagent.post(URL + '/history/save/football').set('Authorization', `Bearer ${token}`);
-    console.log(response.body);
+    let response = await superagent.post(URL + '/history/save/football').set('Authorization', `Bearer ${token}`).send('hello');
+
 
     expect(true).toEqual(true);
     done();

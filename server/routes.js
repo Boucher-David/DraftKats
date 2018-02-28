@@ -3,6 +3,7 @@ const app = module.exports = express.Router();
 const path = require('path');
 const cors = require('cors');
 const bcrypt = require('bluebird').promisifyAll(require('bcrypt'));
+const bodyParser     =        require("body-parser");
 
 const User = require('./models/User.js');
 const History = require('./models/History.js');
@@ -19,6 +20,8 @@ app.use((err, req, res, next) => {
     if (err) return res.sendStatus(400);
 });
 app.use(cors());
+app.use(bodyParser.json());
+
 app.use(authParser);
 app.use((req, res, next) => {
     res.body = res.body || {};
@@ -35,12 +38,21 @@ app.use(express.static(path.join(__dirname, '/../bundle')));
     //User wants to create an account for storing draft history. Save to DB. Create User model with a uuid field, with a  randomly generated uuid() value on save, as well as other fields you deem necessary. 
 app.post('/login/signup', async (req, res, next) => {
 
+    if (!req.body.credentials) return res.json({
+        message: 'Please provide a username and password. Basic authentication required.'
+    });
 
 
-    let [err, user] = await awaitIFY(User.findOne({username: req.body.auth.credentials[0]}));
+    if (req.body.credentials.length < 2 || req.body.credentials[1] === '' || req.body.credentials[0] === '') return res.json({
+        message: 'Please provide a username and password. Basic authentication required.'
+    });
+
+
+
+    let [err, user] = await awaitIFY(User.findOne({username: req.body.credentials[0]}));
 
     if (user === null) {
-        newUser._save(newUser, req.body.auth.credentials).then(result => {
+        newUser._save(newUser, req.body.credentials).then(result => {
 
             return res.send({
                 created: true
@@ -59,9 +71,18 @@ app.post('/login/signup', async (req, res, next) => {
 });
 
 app.post('/login/signin', async (req, res, next) => {
+    if (!req.body.credentials) return res.json({
+        message: 'Please provide a username and password. Basic authentication required.'
+    });
+
+
+    if (req.body.credentials.length < 2 || req.body.credentials[1] === '' || req.body.credentials[0] === '') return res.json({
+        message: 'Please provide a username and password. Basic authentication required.'
+    });
+
     let err, user, match;
     
-    [err, user] = await awaitIFY(User.findOne({username: req.body.auth.credentials[0]}).then(exists => {
+    [err, user] = await awaitIFY(User.findOne({username: req.body.credentials[0]}).then(exists => {
 
         return (exists) ? exists : null;
     }));
@@ -70,7 +91,7 @@ app.post('/login/signin', async (req, res, next) => {
         login: false
     });
 
-    [err, match] = await awaitIFY(newUser.compare(req.body.auth.credentials[1], user.password));
+    [err, match] = await awaitIFY(newUser.compare(req.body.credentials[1], user.password));
     
     if (err || !match) return res.json({login:false});
 
@@ -83,41 +104,47 @@ app.post('/login/signin', async (req, res, next) => {
 
 });
 
-app.get('/login/signout', async (req, res, next) => {
-let updated;
-    if (req.body.auth.type === 'Basic' || !req.body.auth.credentials) return res.json({loggedOut: false});
+app.get('/login/signout/:token', async (req, res, next) => {
+    let updated;
+    console.log('here');
+    let token = await newUser.parseJWT(req.params.token);
 
-    let [err, user] = await awaitIFY(User.findOne({user_id: req.body.auth.token}));
+    console.log('pre token: ', token);
+    if (!token) return res.json({
+        loggedOut: false
+    });
+    console.log('post token: ', token);
+    let [err, user] = await awaitIFY(User.findOne({user_id: token.user_id}));
 
     if (user === null) return res.json({
         loggedOut: false
     });
 
-    
     [err, updated] = await awaitIFY(User.findOneAndUpdate({user_id: user.user_id}, {user_id: randomstring.generate({length: 100})}, {new: true}));
 
-    return (updated) ? res.json({loggedOut: true}) : res.json({loggedOutfalse}); 
+    return (updated) ? res.json({loggedOut: true}) : res.json({loggedOut: false}); 
 
 });
 
 app.post('/login/update', async (req, res, next) => {
     let comparePassword, newHash, updated;
-    if (req.body.auth.credentials.length !== 3) return res.json({
+    
+    if (req.body.credentials.length !== 3) return res.json({
         updated: false,
         message: 'Please make sure to send username, password, and new password as basic auth'
     });
  
-    let [err, user] = await awaitIFY(User.findOne({username: req.body.auth.credentials[0]}));
+    let [err, user] = await awaitIFY(User.findOne({username: req.body.credentials[0]}));
 
     if (!user) return res.json({
         updated: false
     });
 
-    [err, comparePassword] = await awaitIFY(newUser.compare(req.body.auth.credentials[1], user.password));
+    [err, comparePassword] = await awaitIFY(newUser.compare(req.body.credentials[1], user.password));
 
     if (!comparePassword) return res.json({updated: false});
 
-    [err, newHash] = await awaitIFY(bcrypt.hashAsync(req.body.auth.credentials[2], 15));
+    [err, newHash] = await awaitIFY(bcrypt.hashAsync(req.body.credentials[2], 15));
 
     [err, updated] = await awaitIFY(User.findOneAndUpdate({user_id: user.user_id},{password: newHash},{new: true}));
 
@@ -146,6 +173,7 @@ app.get('/history/get/:sport', async (req, res, next) => {
 });
 
 app.post('/history/save/:sport', async (req, res, next) =>{
+    
     let [err, user] = await awaitIFY(User.findOne({user_id: req.body.auth.token}));
 
     return res.json(user);
