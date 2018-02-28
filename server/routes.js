@@ -5,7 +5,11 @@ const cors = require('cors');
 const bcrypt = require('bluebird').promisifyAll(require('bcrypt'));
 
 const User = require('./models/User.js');
+const History = require('./models/History.js');
+
 const newUser = new User();
+
+
 const awaitIFY = require('./lib/awaitIFY.js');
 var randomstring = require("randomstring");
 
@@ -69,6 +73,7 @@ app.post('/login/signin', async (req, res, next) => {
     [err, match] = await awaitIFY(newUser.compare(req.body.auth.credentials[1], user.password));
     
     if (err || !match) return res.json({login:false});
+
     let token = await awaitIFY(user.generateToken(user));
 
     return res.json({
@@ -120,6 +125,30 @@ app.post('/login/update', async (req, res, next) => {
         updated: true,
     });
 
+});
+
+app.get('/history/get/:sport', async (req, res, next) => {
+
+    if (!req.body.auth.credentials) return res.json({
+        login: false
+    });
+    let [err, user] = await awaitIFY(User.findOne({user_id: req.body.auth.token}));
+
+    if (!user) return res.json({
+        login: false
+    });
+
+    // search history db for user_id
+    // search history db for sport    
+    
+    return res.json(req.body.auth);
+
+});
+
+app.post('/history/save/:sport', async (req, res, next) =>{
+    let [err, user] = await awaitIFY(User.findOne({user_id: req.body.auth.token}));
+
+    return res.json(user);
 });
 
 app.use('*', (req, res, next) => {    

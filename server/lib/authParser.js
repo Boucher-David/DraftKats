@@ -22,20 +22,24 @@ let _basic = (auth, req, res, next) => {
 
 let _bearer = async (auth, req, res, next) => {
     let token = await newUser.parseJWT(auth);
+
     if (token) {
+
         req.body.auth = {
             token: token.user_id,
             credentials: true,
             type: 'Bearer'
         }
-        return next();
+        return;
     } else {
         req.body.auth = {
             credentials: false,
             type: 'Bearer',
             token: false
         }
+        return;
     }
+
 
 }
 
@@ -53,8 +57,8 @@ module.exports = async (req, res, next) => {
 
     let authType = authHeader.split (' ');
 
-    if (authType[0] === 'Basic') _basic(authType[1], req, res, next);
-    if (authType[0] === 'Bearer') _bearer(authType[1], req, res, next);
+    if (authType[0] === 'Basic') await _basic(authType[1], req, res, next);
+    if (authType[0] === 'Bearer') await _bearer(authType[1], req, res, next);
 
     return next();
 };
