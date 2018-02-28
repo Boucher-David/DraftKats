@@ -37,19 +37,20 @@ test('Test signin and save the token we receive', async (done) => {
     done();
 });
 
-test('Test sending no bearer token', async (done) => {
-    let response = await superagent.get(URL + '/login/signout');
-    expect(response.body.loggedOut).toEqual(false);
-    done();
-});
 
 test('Test sending the wrong bearer token', async (done) => {
-    let response = await superagent.get(URL + '/login/signout').set('Authorization', `Bearer abc123`);
+    let response = await superagent.get(URL + '/login/signout/abc123');
 
     expect(response.body.loggedOut).toEqual(false);
 
     done();
 });
 
+test('Test sending the correct bearer token', async (done) => {
+    let response = await superagent.get(URL + `/login/signout/${token}`);
 
+    expect(response.body.loggedOut).toEqual(true);
+
+    done();
+});
 
