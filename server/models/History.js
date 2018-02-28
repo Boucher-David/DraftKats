@@ -3,7 +3,7 @@
 const Mongoose = require('mongoose');
 
 const history = new Mongoose.Schema({
-    user_id: {type: String, required: true},
+    user_mongoose_id: {type: String, required: true},
     sport: {type: String, required: true},
     team: {type: Array} 
 });

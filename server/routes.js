@@ -16,6 +16,8 @@ var randomstring = require("randomstring");
 
 const authParser = require('./lib/authParser.js');
 
+let sports = ['football', 'soccer', 'baseball', 'basketball'];
+
 app.use((err, req, res, next) => {
     if (err) return res.sendStatus(400);
 });
@@ -172,11 +174,41 @@ app.get('/history/get/:sport', async (req, res, next) => {
 
 });
 
-app.post('/history/save/:sport', async (req, res, next) =>{
-    
-    let [err, user] = await awaitIFY(User.findOne({user_id: req.body.auth.token}));
+app.post('/history/save/:sport/:token', async (req, res, next) =>{
+    let saved;
+    if (sports.indexOf(req.params.sport) === -1) return res.json({
+        saved: false
+    });
 
-    return res.json(user);
+    let token = await newUser.parseJWT(req.params.token);
+    if (!token) return res.json({
+        saved: false
+    });
+
+    if (req.body.team === '[]') return res.json({
+        saved: false
+    });
+
+    let [err, user] = await awaitIFY(User.findOne({user_id: token.user_id}));
+
+    if (!user) return res.json({
+        saved: false
+    });
+
+    let newHistory = new History({
+        user_mongoose_id: user._id,
+        sport: req.params.sport,
+        team: req.body.team
+    });
+
+    [err, saved] = await awaitIFY(newHistory.save());
+
+    return (saved) ? res.json({
+        saved: true
+    }) : res.json({
+        saved: false
+    });
+
 });
 
 app.use('*', (req, res, next) => {    
