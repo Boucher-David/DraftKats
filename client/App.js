@@ -1,5 +1,9 @@
 import React from 'react';
 import ReactDom from 'react-dom';
+import DraftDisplay from './components/categories/draft';
+import HomeDisplay from './components/categories/home';
+import HistoryDisplay from './components/categories/history';
+import ProfileDisplay from './components/categories/profile';
 
 class App extends React.Component {
     constructor(props) {
@@ -7,7 +11,12 @@ class App extends React.Component {
     }
     render() {
         return (
-            <div>Hello World</div>
+          <div>
+            <DraftDisplay />
+            <HomeDisplay />
+            <HistoryDisplay />
+            <ProfileDisplay />
+          </div>
         )
     }
 }
