@@ -4,6 +4,7 @@ import DraftDisplay from './components/categories/draft';
 import HomeDisplay from './components/categories/home';
 import HistoryDisplay from './components/categories/history';
 import ProfileDisplay from './components/categories/profile';
+import './styles/main.scss';
 
 class App extends React.Component {
     constructor(props) {
