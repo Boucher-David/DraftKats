@@ -1,6 +1,6 @@
 const webpack = require('webpack');
 const path = require('path');
-const ExtractPlugin = require('extract-text-webpack-plugin');
+
 require('dotenv').config();
 
 
@@ -20,25 +20,13 @@ module.exports = {
         rules: [
             {
                 test: /\.scss$/,
-                loader: ExtractPlugin.extract({
-                    // These get loaded in reverse order and the output of one pipes into the other (think of a then)
-                    use: [
-                        {
-                            loader: 'css-loader', 
-                            options: {
-                                sourceMap:true
-                            }
-                        },
-                        'resolve-url-loader',
-                        {
-                            loader: 'sass-loader',
-                            options: {
-                                sourceMap: true,
-                                includePaths:[`${__dirname}/client/styles/`]
-                            }
-                        }
-                    ]
-                })
+                use: [{
+                    loader: "style-loader" // creates style nodes from JS strings
+                }, {
+                    loader: "css-loader" // translates CSS into CommonJS
+                }, {
+                    loader: "sass-loader" // compiles Sass to CSS
+                }]
             },
             {
                     test: /\.jsx?$/,

@@ -51,9 +51,11 @@
   "devDependencies": {
     "bluebird": "^3.5.1",
     "cors": "^2.8.4",
+    "css-loader": "^0.28.11",
     "dotenv": "^4.0.0",
     "jest": "^21.2.1",
     "nodemon": "^1.12.1",
+    "style-loader": "^0.20.3",
     "webpack-dev-server": "^2.9.2"
   }
 }
