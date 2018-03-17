@@ -4,6 +4,7 @@ import DraftDisplay from './components/categories/draft';
 import HomeDisplay from './components/categories/home';
 import HistoryDisplay from './components/categories/history';
 import ProfileDisplay from './components/categories/profile';
+import NavBar from './components/categories/navbar';
 import './styles/main.scss';
 
 class App extends React.Component {
@@ -13,6 +14,7 @@ class App extends React.Component {
     render() {
         return (
           <div>
+            <NavBar />
             <DraftDisplay />
             <HomeDisplay />
             <HistoryDisplay />
