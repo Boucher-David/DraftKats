@@ -35,11 +35,12 @@ app.use((req, res, next) => {
 app.use(express.static(path.join(__dirname, '/../bundle')));
 
 app.use(async (req, res, next) => {
-    const sports = ['football'];
+    const sports = ['Soccer', 'Baseball', 'Football'];
     sports.forEach(async (sport) => {
         let a = await playerFetch[sport]();
     });
     return next();
+    
 });
 
 // Route creator is responsible for testing + documenting each route thoroughly. Document and test any modules you create on the route, too. 
