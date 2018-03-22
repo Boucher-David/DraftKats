@@ -35,7 +35,7 @@ app.use((req, res, next) => {
 app.use(express.static(path.join(__dirname, '/../bundle')));
 
 app.use(async (req, res, next) => {
-    const sports = ['Soccer', 'Baseball', 'Football'];
+    const sports = ['Soccer', 'Baseball', 'Football', 'Basketball'];
     sports.forEach(async (sport) => {
         let a = await playerFetch[sport]();
     });

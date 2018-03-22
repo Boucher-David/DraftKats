@@ -5,7 +5,7 @@ const superagent = require('superagent');
 let footballAPI = 'http://api.cbssports.com/fantasy/players/list?versiojn=3.0&SPORT=football&response_format=json';
 let soccerAPI = 'https://fantasy.premierleague.com/drf/bootstrap-static';
 let baseballAPI = 'http://api.cbssports.com/fantasy/players/list?versiojn=3.0&SPORT=baseball&response_format=json';
-let basketballAPI = '';
+let basketballAPI = 'http://data.nba.net/10s/prod/v1/2017/players.json';
 
 let fetch = (api) => {
   return new Promise((resolve,reject) => {
@@ -92,5 +92,31 @@ module.exports = {
     return;
   },
 
-  Baseketball: () => {}
+  Basketball: async () => {
+    let basketballTeams = await fetch('http://data.nba.net/10s/prod/v1/2017/teams.json');
+    let parsedTeams = JSON.parse(basketballTeams.text).league.standard;
+
+    let teamList = {};
+    let playerList = [];
+
+    parsedTeams.forEach(team => {
+      teamList[team['teamId']] = team['tricode'];
+    });
+
+    let basketballPlayers = await fetch(basketballAPI);
+    let parsedPlayers = JSON.parse(basketballPlayers.text).league.standard;
+
+    parsedPlayers.forEach(player => {
+      if (teamList[player.teamId] === undefined) return;
+      let playerObj = {
+        team: teamList[player.teamId],
+        position: player.pos,
+        name: player.firstName.concat(' ', player.lastName)
+      };
+
+      playerList.push(playerObj);
+    });
+
+    saveList('Basketball', playerList);
+  }
 }
