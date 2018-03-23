@@ -4,7 +4,9 @@ const path = require('path');
 const cors = require('cors');
 const bcrypt = require('bluebird').promisifyAll(require('bcrypt'));
 const bodyParser     =        require("body-parser");
-const playerFetch = require('./lib/playerFetch');
+
+const cronDateFile = require('./lib/cronDateFile.js');
+
 
 const User = require('./models/User.js');
 const History = require('./models/History.js');
@@ -34,14 +36,6 @@ app.use((req, res, next) => {
 
 app.use(express.static(path.join(__dirname, '/../bundle')));
 
-app.use(async (req, res, next) => {
-    const sports = ['Soccer', 'Baseball', 'Football', 'Basketball'];
-    sports.forEach(async (sport) => {
-        let a = await playerFetch[sport]();
-    });
-    return next();
-    
-});
 
 // Route creator is responsible for testing + documenting each route thoroughly. Document and test any modules you create on the route, too. 
 
