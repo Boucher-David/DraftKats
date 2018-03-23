@@ -15,17 +15,17 @@ let http = null;
 let isRunning = null;
 
 module.exports = {
-   start: () => {
+   start: (test=false) => {
        if (isRunning) return "Server is already running";
        if (process.env.BACKEND_PORT === undefined) return console.log("You need to create a .env file like the guide says.");
-       http = app.listen(process.env.BACKEND_PORT, () => {
-           console.log(`Server is running on port ${process.env.BACKEND_PORT}`);
+       return http = app.listen(process.env.BACKEND_PORT, () => {
+           if (!test) console.log(`Server is running on port ${process.env.BACKEND_PORT}`);
            isRunning = true;
            return;
        });
 
    },
-   stop: async () => {
+   stop: () => {
         return new Promise(resolve => {
             if (http === null || !isRunning) return resolve(isRunning);
             http.close(() => {

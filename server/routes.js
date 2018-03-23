@@ -117,6 +117,7 @@ app.post('/login/signin', async (req, res, next) => {
 
 app.get('/login/signout/:token', async (req, res, next) => {
     let updated;
+
     let token = await newUser.parseJWT(req.params.token);
 
     if (!token) return res.json({
