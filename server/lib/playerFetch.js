@@ -28,6 +28,9 @@ module.exports = {
     let playerArray = [];
     Object.keys(parsed).forEach(i => {
       if (!positions.includes(parsed[i].position)) return;
+      
+      if (parsed[i].pro_status !== 'A') return;
+
       let player = {
         name: parsed[i].fullname,
         position: parsed[i].position,
@@ -62,6 +65,7 @@ module.exports = {
     });
 
     Object.keys(parsed).forEach(i => {
+      if (parsed[i].status === 'u') return;
       let player = {
         position: position[parsed[i].element_type],
         team: teams[parsed[i].team_code],
@@ -79,6 +83,8 @@ module.exports = {
     let playerArray = [];
 
     Object.keys(parsed).forEach(i => {
+
+      if (parsed[i].pro_status !== 'A') return;
       let player = {
         name: parsed[i].fullname,
         position: parsed[i].position,
