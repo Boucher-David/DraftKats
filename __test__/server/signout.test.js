@@ -12,20 +12,15 @@ let username = 'david';
 let password = 'password';
 let token = '';
 
-beforeAll(done => {
-    server.start();
-
-    User.remove({username: 'david'}).then(() => {
-        
-        newUser._save(newUser, [username, password]).then(() => {
-            return done();
-        });
-    });
-
+beforeAll(async (done) => {
+    server.start(true);
+    await User.remove({username: 'david'});
+    await newUser._save(newUser, [username, password]);
+    return done();
   });
 
-afterAll(done => {
-    server.stop();
+  afterAll(async (done) => {
+    await server.stop();
     done();
 });
 

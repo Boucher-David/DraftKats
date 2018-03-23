@@ -108,14 +108,14 @@ app.post('/login/signin', async (req, res, next) => {
 
 app.get('/login/signout/:token', async (req, res, next) => {
     let updated;
-    console.log('here');
+
     let token = await newUser.parseJWT(req.params.token);
 
-    console.log('pre token: ', token);
+
     if (!token) return res.json({
         loggedOut: false
     });
-    console.log('post token: ', token);
+
     let [err, user] = await awaitIFY(User.findOne({user_id: token.user_id}));
 
     if (user === null) return res.json({

@@ -11,15 +11,14 @@ let URL = (process.env.NODE_ENV === 'production') ? 'draftkats.herokuapp.com' : 
 let username = 'david';
 let password = 'password';
 
-beforeAll(done => {
-    server.start();
-    User.remove({username: 'david'}).then(() => {
-        done();
-    });
+beforeAll(async (done) => {
+    server.start(true);
+    await User.remove({username: 'david'});
+    return done();
   });
 
-afterAll(done => {
-    server.stop();
+  afterAll(async (done) => {
+    await server.stop();
     done();
 });
 

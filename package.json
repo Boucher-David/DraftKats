@@ -8,8 +8,8 @@
     "dev-backend": "NODE_ENV=development nodemon ./index.js",
     "dev-frontend": "NODE_ENV=development  webpack-dev-server --content-base bundle/",
     "dev-db": "mkdir -p ./server/db && mongod --dbpath ./server/db",
-    "dev-test": "NODE_ENV=development jest -t __test__/ --watch",
-    "prod-test": "NODE_ENV=production jest -t __test__/ --watch"
+    "dev-test": "NODE_ENV=development jest --runInBand",
+    "prod-test": "NODE_ENV=production jest --runInBand"
   },
   "repository": {
     "type": "git",
@@ -51,7 +51,6 @@
   "devDependencies": {
     "bluebird": "^3.5.1",
     "cors": "^2.8.4",
-    "css-loader": "^0.28.11",
     "dotenv": "^4.0.0",
     "jest": "^21.2.1",
     "nodemon": "^1.12.1",
