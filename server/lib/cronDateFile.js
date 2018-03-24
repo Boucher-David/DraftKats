@@ -14,6 +14,14 @@ var CronJob = require('cron').CronJob;
 //   timeZone /* Time zone of this job. */
 // );
 
+// Sec
+// Min
+// Hour
+// Week
+// Month
+// Day
+
+
 
 module.exports = () => {
   const sports = ['Soccer'];

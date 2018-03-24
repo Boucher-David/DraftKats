@@ -16,16 +16,17 @@ let models = {
 
 
 let fetch = (api) => {
-  return new Promise((resolve,reject) => {
-    superagent.get(api).then(data => {
-      if (data) resolve(data);
-      return reject (null);
+
+  return new Promise((resolve) => {
+    superagent.get(api).end((err,data) => {
+
+      if (err) return resolve(null);
+      return resolve(data);
     });
   });
 }
 
 let saveList = async (sport, list, date) => {
-  console.log('Player list received for: ', sport);
 
   if (date) {
 
@@ -76,8 +77,10 @@ let saveList = async (sport, list, date) => {
 
 module.exports = {
   saveList: saveList, 
+  fetch: fetch,
   Football: async (date) => {
     let footballPlayers = await fetch(footballAPI);
+    if (footballPlayers === null) return;
     let parsed = JSON.parse(footballPlayers.text).body.players;
     let positions = ['WR', 'RB', 'TE', 'QB', 'K', 'DEF'];
     let playerArray = [];
@@ -98,6 +101,7 @@ module.exports = {
   },
   Soccer: async (date) => {
     let soccerPlayers = await fetch(soccerAPI);
+    if (soccerPlayers === null) return;
     let parsed = soccerPlayers.body.elements;
     let playerArray = [];
 
@@ -134,6 +138,7 @@ module.exports = {
   },
   Baseball:async (date) => {
     let baseballPlayers = await fetch(baseballAPI);
+    if (baseballPlayers === null) return;
     let parsed = JSON.parse(baseballPlayers.text).body.players;
     let playerArray = [];
 
@@ -155,6 +160,8 @@ module.exports = {
 
   Basketball: async (date) => {
     let basketballTeams = await fetch('http://data.nba.net/10s/prod/v1/2017/teams.json');
+
+    if (basketballTeams === null) return;
     let parsedTeams = JSON.parse(basketballTeams.text).league.standard;
 
     let teamList = {};
@@ -165,6 +172,7 @@ module.exports = {
     });
 
     let basketballPlayers = await fetch(basketballAPI);
+    if (basketballPlayers === null) return;
     let parsedPlayers = JSON.parse(basketballPlayers.text).league.standard;
 
     parsedPlayers.forEach(player => {
