@@ -7,22 +7,80 @@ let soccerAPI = 'https://fantasy.premierleague.com/drf/bootstrap-static';
 let baseballAPI = 'http://api.cbssports.com/fantasy/players/list?versiojn=3.0&SPORT=baseball&response_format=json';
 let basketballAPI = 'http://data.nba.net/10s/prod/v1/2017/players.json';
 
+let models = {
+  Football: require('../models/Football'),
+  Soccer: require('../models/Soccer'),
+  Baseball: require('../models/Baseball'),
+  Basketball: require('../models/Basketball')
+}
+
+
 let fetch = (api) => {
-  return new Promise((resolve,reject) => {
-    superagent.get(api).then(data => {
-      if (data) resolve(data);
-      return reject (null);
+
+  return new Promise((resolve) => {
+    superagent.get(api).end((err,data) => {
+
+      if (err) return resolve(null);
+      return resolve(data);
     });
   });
 }
 
-let saveList = (sport, list) => {
-  console.log(sport, list.length);
+let saveList = async (sport, list, date) => {
+
+  if (date) {
+
+    await models[sport].remove({});
+    list.forEach(async (player) => {
+      player['drafted'] = [];
+      player['adp'] = null;
+      let newPlayer = new models[sport](player);
+      await newPlayer.save();
+    });
+  } else {
+
+    list.forEach(async (player) => {
+      let findPlayer = await models[sport].find({name: player.name});
+
+      if (Object.keys(findPlayer).length === 0) {
+        let newPlayer = new models[sport](player);
+        await newPlayer.save();
+      } else {
+        let changed = false;
+
+        if (findPlayer[0].name !== player.name) {
+          findPlayer[0].name = player.name;
+          changed = true;
+        }
+
+        if (findPlayer[0].team !== player.team) {
+          findPlayer[0].team = player.team;
+          changed = true;
+        }
+
+        if (findPlayer[0].position !== findPlayer[0].position) {
+          findPlayer[0].position = findPlayer[0].position;
+          changed = true;
+        }
+
+        if (!changed) return;
+
+        await findPlayer.save();
+
+        return;
+
+      }
+    });
+  }
+
 }
 
 module.exports = {
-  Football: async () => {
+  saveList: saveList, 
+  fetch: fetch,
+  Football: async (date) => {
     let footballPlayers = await fetch(footballAPI);
+    if (footballPlayers === null) return;
     let parsed = JSON.parse(footballPlayers.text).body.players;
     let positions = ['WR', 'RB', 'TE', 'QB', 'K', 'DEF'];
     let playerArray = [];
@@ -38,11 +96,12 @@ module.exports = {
       };
       playerArray.push(player);
     });
-    saveList('Football',playerArray);
+    saveList('Football',playerArray, date);
     return playerArray;
   },
-  Soccer: async () => {
+  Soccer: async (date) => {
     let soccerPlayers = await fetch(soccerAPI);
+    if (soccerPlayers === null) return;
     let parsed = soccerPlayers.body.elements;
     let playerArray = [];
 
@@ -74,11 +133,12 @@ module.exports = {
       playerArray.push(player);
     });
 
-    saveList('Soccer', playerArray);
+    saveList('Soccer', playerArray, date);
     return;
   },
-  Baseball:async () => {
+  Baseball:async (date) => {
     let baseballPlayers = await fetch(baseballAPI);
+    if (baseballPlayers === null) return;
     let parsed = JSON.parse(baseballPlayers.text).body.players;
     let playerArray = [];
 
@@ -93,13 +153,15 @@ module.exports = {
       playerArray.push(player);
     });
 
-    saveList('Baseball',playerArray);
+    saveList('Baseball',playerArray, date);
 
     return;
   },
 
-  Basketball: async () => {
+  Basketball: async (date) => {
     let basketballTeams = await fetch('http://data.nba.net/10s/prod/v1/2017/teams.json');
+
+    if (basketballTeams === null) return;
     let parsedTeams = JSON.parse(basketballTeams.text).league.standard;
 
     let teamList = {};
@@ -110,6 +172,7 @@ module.exports = {
     });
 
     let basketballPlayers = await fetch(basketballAPI);
+    if (basketballPlayers === null) return;
     let parsedPlayers = JSON.parse(basketballPlayers.text).league.standard;
 
     parsedPlayers.forEach(player => {
@@ -123,6 +186,6 @@ module.exports = {
       playerList.push(playerObj);
     });
 
-    saveList('Basketball', playerList);
+    saveList('Basketball', playerList, date);
   }
 }
