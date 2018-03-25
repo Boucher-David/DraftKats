@@ -33,7 +33,7 @@ test('Test that correct credentials give us a true for login and a token', async
 });
 
 test('Test if we send the wrong token as auth', async (done) => {
-    let response = await superagent.get(URL + `/history/get/football/wrongToken`)
+    let response = await superagent.get(URL + `/history/get/Football/wrongToken`)
 
     expect(response.body.searched).toEqual(false);
     done();
@@ -47,7 +47,7 @@ test('Test if we send the incorrect sport', async (done) => {
 });
 
 test('Test if we send everything correctly and get list back', async (done) => {
-    let response = await superagent.get(URL + `/history/get/football/${token}`);
+    let response = await superagent.get(URL + `/history/get/Football/${token}`);
 
     expect(response.body.searched).toEqual(true);
     done();

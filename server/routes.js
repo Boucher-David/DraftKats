@@ -19,7 +19,7 @@ var randomstring = require("randomstring");
 
 const authParser = require('./lib/authParser.js');
 
-let sports = ['football', 'soccer', 'baseball', 'basketball'];
+let sports = ['Football', 'Soccer', 'Baseball', 'Basketball'];
 
 app.use((err, req, res, next) => {
     if (err) return res.sendStatus(400);
@@ -153,7 +153,7 @@ app.post('/login/update', async (req, res, next) => {
     [err, updated] = await awaitIFY(User.findOneAndUpdate({user_id: user.user_id},{password: newHash},{new: true}));
 
     return res.json({
-        updated: true,
+        updated: true
     });
 
 });
@@ -235,7 +235,7 @@ app.get('/history/get/:sport/:token', async (req, res, next) => {
 });
 
 app.get('/draft/:sport', async (req, res, next) => {
-    let sports = ['Soccer','Football','Baseball','Basketball'];
+
     if (! sports.includes(req.params.sport)) return res.send('Invalid sport');
 
     let list = await playerFetch.models[req.params.sport].find({}).sort({adp: -1});
@@ -253,7 +253,7 @@ app.get('/draft/:sport', async (req, res, next) => {
 });
 
 app.post('/draft/:sport/:token', async (req, res, next) => {
-    let sports = ['Soccer','Football','Baseball','Basketball'];
+
     if (! sports.includes(req.params.sport)) return res.json({
         saved: false
     });

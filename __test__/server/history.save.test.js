@@ -32,7 +32,7 @@ test('Test that correct credentials give us a true for login and a token', async
 });
 
 test('Test if we send the wrong token as auth', async (done) => {
-    let response = await superagent.post(URL + `/history/save/football/wrongToken`).send({team: []});
+    let response = await superagent.post(URL + `/history/save/Football/wrongToken`).send({team: []});
 
     expect(response.body.saved).toEqual(false);
     done();
@@ -46,28 +46,28 @@ test('Test if we send the incorrect sport', async (done) => {
 });
 
 test('Test if we send an empty array', async (done) => {
-    let response = await superagent.post(URL + `/history/save/football/${token}`).send({team: []});
+    let response = await superagent.post(URL + `/history/save/Football/${token}`).send({team: []});
     
     expect(response.body.saved).toEqual(false);
     done();
 });
 
 test('Test sending all the correct info and we saved the team', async (done) => {
-    let response = await superagent.post(URL + `/history/save/football/${token}`).send({team: [{test: true}]});
+    let response = await superagent.post(URL + `/history/save/Football/${token}`).send({team: [{test: true}]});
 
     expect(response.body.saved).toEqual(true);
     done();
 });
 
 test('Test sending all the correct info and we saved the team', async (done) => {
-    let response = await superagent.post(URL + `/history/save/football/${token}`).send({team: [{test2: true}]});
+    let response = await superagent.post(URL + `/history/save/Football/${token}`).send({team: [{test2: true}]});
 
     expect(response.body.saved).toEqual(true);
     done();
 });
 
 test('Test sending all the correct info and we saved the team', async (done) => {
-    let response = await superagent.post(URL + `/history/save/football/${token}`).send({team: [{test3: true}]});
+    let response = await superagent.post(URL + `/history/save/Football/${token}`).send({team: [{test3: true}]});
 
     expect(response.body.saved).toEqual(true);
     done();
