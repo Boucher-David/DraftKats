@@ -238,26 +238,3 @@ app.get('/history/get/:sport/:token', async (req, res, next) => {
 app.use('*', (req, res, next) => {    
     res.redirect('/');
 });
-
-// POST login/login
-    //User enters login information. Generate JWT. Create middleware for parsing JWT tokens that we can use in other routes. Use uuid field as token input, not mongo's _id.
-    
-// PUT login/update
-    //User wants to change their password. Verify and update.
-    
-// POST login/signout
-    //User clicks signout button. Update the user's uuid field with a new random value.
-
-// POST history/:sport
-    //User completed draft. We send their drafted team and save it to db. DB will need to know which username did which draft.
-
-// GET /history/:sport
-    //User wants to see their previous drafts of the sport in :sport. Query the sports db and send them their history.
-    
-// GET /draft/:sport
-    //front-end sends a request for player data for sport, based upon req.params.sport. send them back players data, and roster setup like so:
-//  {
-   //playerData: [{name: name, team: team, position: position, adp: adp},{name: name, team: team, position: position, adp: adp}],
-   //roster: [{position: position, value: 1},{position: position, value: 1}]
-//  }
-    
