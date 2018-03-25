@@ -24,9 +24,9 @@ var CronJob = require('cron').CronJob;
 
 
 module.exports = () => {
-  const sports = ['Soccer'];
+  let sports = ['Soccer','Football','Baseball','Basketball'];
   sports.forEach(async (sport) => {
-      let a = await playerFetch[sport](false);
+      let a = await playerFetch[sport](true);
   });
 
 }

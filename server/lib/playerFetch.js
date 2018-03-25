@@ -33,7 +33,7 @@ let saveList = async (sport, list, date) => {
     await models[sport].remove({});
     list.forEach(async (player) => {
       player['drafted'] = [];
-      player['adp'] = null;
+      player['adp'] = 10000;
       let newPlayer = new models[sport](player);
       await newPlayer.save();
     });
@@ -78,6 +78,7 @@ let saveList = async (sport, list, date) => {
 module.exports = {
   saveList: saveList, 
   fetch: fetch,
+  models: models,
   Football: async (date) => {
     let footballPlayers = await fetch(footballAPI);
     if (footballPlayers === null) return;
@@ -92,7 +93,8 @@ module.exports = {
       let player = {
         name: parsed[i].fullname,
         position: parsed[i].position,
-        team: parsed[i].pro_team
+        team: parsed[i].pro_team,
+        adp: 'N/R'
       };
       playerArray.push(player);
     });
