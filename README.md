@@ -28,17 +28,6 @@ These ports can be anything you want, just different from each other (and not th
 
 "pgrep mongo". Get the ID, then "kill ID" to terminate any open mongo connections that are hidden. 
 
-# API
-
-Baseball: https://fantasybaseballnerd.com/service/draft-rankings
-
-Handegg: http://api.cbssports.com/fantasy/players/average-draft-position?version=3.0&response_format=JSON&SPORT=football
-
-Proper Football (will have to rank players in order of points manually): https://fantasy.premierleague.com/drf/bootstrap-static
-
-Basketball: https://www.fantasybasketballnerd.com/service/draft-rankings
-
-
 # Backround Routes with data requirements and responses.
 
 GET '/draft/:sport'
