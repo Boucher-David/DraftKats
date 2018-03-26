@@ -3,10 +3,10 @@ const app = module.exports = express.Router();
 const path = require('path');
 const cors = require('cors');
 const bcrypt = require('bluebird').promisifyAll(require('bcrypt'));
-const bodyParser     =        require("body-parser");
+const bodyParser = require("body-parser");
 
 const cronDateFile = require('./lib/cronDateFile.js');
-
+const playerFetch = require('./lib/playerFetch');
 
 const User = require('./models/User.js');
 const History = require('./models/History.js');
@@ -19,7 +19,7 @@ var randomstring = require("randomstring");
 
 const authParser = require('./lib/authParser.js');
 
-let sports = ['football', 'soccer', 'baseball', 'basketball'];
+let sports = ['Football', 'Soccer', 'Baseball', 'Basketball'];
 
 app.use((err, req, res, next) => {
     if (err) return res.sendStatus(400);
@@ -153,7 +153,7 @@ app.post('/login/update', async (req, res, next) => {
     [err, updated] = await awaitIFY(User.findOneAndUpdate({user_id: user.user_id},{password: newHash},{new: true}));
 
     return res.json({
-        updated: true,
+        updated: true
     });
 
 });
@@ -232,6 +232,61 @@ app.get('/history/get/:sport/:token', async (req, res, next) => {
         list
     });
 
+});
+
+app.get('/draft/:sport', async (req, res, next) => {
+
+    if (! sports.includes(req.params.sport)) return res.send('Invalid sport');
+
+    let list = await playerFetch.models[req.params.sport].find({}).sort({adp: -1});
+
+    list.forEach((player, i) => {
+        let sendPlayer = {};
+        sendPlayer['name'] = player.name;
+        sendPlayer['team'] = player.team;
+        sendPlayer['adp'] = player.adp;
+        sendPlayer['position'] = player.position;
+        sendPlayer['id'] = player._id;
+        list[i] = sendPlayer;
+    });
+    return res.send(list);
+});
+
+app.post('/draft/:sport/:token', async (req, res, next) => {
+
+    if (! sports.includes(req.params.sport)) return res.json({
+        saved: false
+    });
+    if (req.body.position === undefined || req.body.position === '') return res.json({
+        saved: false
+    });
+    if (req.body.id === undefined || req.body.id === '') return res.json({
+        saved: false
+    });
+
+    let token = await newUser.parseJWT(req.params.token);
+
+    if (!token) return res.json({
+        saved: false
+    });
+
+    let [err, user] = await awaitIFY(User.findOne({user_id: token.user_id}));
+
+    if (user === null) return res.json({
+        saved: false
+    });
+
+    let id = req.body.id;
+    let player = await playerFetch.models[req.params.sport].findOne({_id: req.body.id});
+
+    player.drafted.push(Number(req.body.position));
+    player.adp = Math.round((player.drafted.reduce((acc, curr) => acc + curr)) / player.drafted.length);
+
+    let updated = await playerFetch.models[req.params.sport].findOneAndUpdate({_id: player._id},{$set: {drafted: player.drafted, adp: player.adp}},{new: true});    
+
+    res.json({
+        saved: true
+    });
 
 });
 
