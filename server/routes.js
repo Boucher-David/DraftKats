@@ -5,7 +5,7 @@ const cors = require('cors');
 const bcrypt = require('bluebird').promisifyAll(require('bcrypt'));
 const bodyParser = require("body-parser");
 
-const cronDateFile = require('./lib/cronDateFile.js');
+const cronDateFile = require('./lib/cronDateFile.js')();
 const playerFetch = require('./lib/playerFetch');
 
 const User = require('./models/User.js');
@@ -241,10 +241,11 @@ app.get('/draft/:sport', async (req, res, next) => {
     let list = await playerFetch.models[req.params.sport].find({}).sort({adp: -1});
 
     list.forEach((player, i) => {
+        
         let sendPlayer = {};
         sendPlayer['name'] = player.name;
         sendPlayer['team'] = player.team;
-        sendPlayer['adp'] = player.adp;
+        sendPlayer['adp'] = i + 1;
         sendPlayer['position'] = player.position;
         sendPlayer['id'] = player._id;
         list[i] = sendPlayer;
