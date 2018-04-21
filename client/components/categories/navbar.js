@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 
 class NavBar extends React.Component {
   constructor(props) {
@@ -7,29 +8,14 @@ class NavBar extends React.Component {
 
   render() {
     return (
-      <div>
         <nav>
-        <input type="checkbox" />
         <ul>
-          <li><a href="#">Home</a></li>
-          <li><a href="#">Draft</a>
-            <ul>
-              <li><a href="#">Baseball</a></li>
-              <li><a href="#">Football</a></li>
-              <li><a href="#">Proper Football</a></li>
-            </ul>
-          </li>
-          <li><a href="#">History</a>
-            <ul>
-              <li><a href="#">Baseball</a></li>
-              <li><a href="#">Football</a></li>
-              <li><a href="#">Proper Football</a></li>
-            </ul>
-          </li>
-          <li><a href="#">Profile</a></li>
+          <li><Link to="/home">Home</Link></li>
+          <li><Link to="/draft">Draft</Link></li>
+          <li><Link to="/history">History</Link></li>
+          <li><Link to="/profile">Profile</Link></li>
         </ul>
         </nav>
-      </div>
     )
   }
 }
