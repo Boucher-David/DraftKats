@@ -15,7 +15,7 @@
     "type": "git",
     "url": "git+https://github.com/Boucher-David/DraftKats.git"
   },
-  "author": "Larry, Kelati, David",
+  "author": "Larry, David",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Boucher-David/DraftKats/issues"
@@ -41,6 +41,8 @@
     "react": "^16.2.0",
     "react-devtools": "^3.0.0",
     "react-dom": "^16.2.0",
+    "react-router": "^4.2.0",
+    "react-router-dom": "^4.2.2",
     "react-test-renderer": "^16.2.0",
     "resolve-url-loader": "^2.2.0",
     "sass-loader": "^6.0.6",

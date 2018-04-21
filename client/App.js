@@ -6,6 +6,8 @@ import HistoryDisplay from './components/categories/history';
 import ProfileDisplay from './components/categories/profile';
 import NavBar from './components/categories/navbar';
 import './styles/main.scss';
+import { BrowserRouter, Route } from 'react-router-dom';
+
 
 class App extends React.Component {
     constructor(props) {
@@ -15,12 +17,15 @@ class App extends React.Component {
         return (
           <div>
             <NavBar />
-            <DraftDisplay />
-            <HomeDisplay />
-            <HistoryDisplay />
-            <ProfileDisplay />
+            {this.props.children}
           </div>
         )
     }
 }
-ReactDom.render(<App />, document.getElementById('app'));
+ReactDom.render((
+    <BrowserRouter>
+        <Route path="/" component={App}>
+            <Route path="/home" component={HomeDisplay} />
+        </Route>
+    </BrowserRouter>
+), document.getElementById('app'));

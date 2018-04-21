@@ -1,4 +1,5 @@
 import React from 'react';
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 class NavBar extends React.Component {
   constructor(props) {
@@ -7,29 +8,42 @@ class NavBar extends React.Component {
 
   render() {
     return (
+      <Router>
       <div>
         <nav>
         <input type="checkbox" />
         <ul>
-          <li><a href="#">Home</a></li>
-          <li><a href="#">Draft</a>
-            <ul>
-              <li><a href="#">Baseball</a></li>
-              <li><a href="#">Football</a></li>
-              <li><a href="#">Proper Football</a></li>
-            </ul>
+          <li>
+            <Link to="/">Home</Link>
           </li>
-          <li><a href="#">History</a>
-            <ul>
-              <li><a href="#">Baseball</a></li>
-              <li><a href="#">Football</a></li>
-              <li><a href="#">Proper Football</a></li>
-            </ul>
+          <li>
+            <Link to="/draft">Draft</Link>
+                <ul>
+                  <li>Baseball</li>
+                  <li>Football</li>
+                  <li>Proper Football</li>
+                </ul>
           </li>
-          <li><a href="#">Profile</a></li>
+          <li>
+            <Link to="/history">History</Link>
+              <ul>
+                <li>Baseball</li>
+                <li>Football</li>
+                <li>Proper Football</li>
+              </ul>
+            </li>
+          <li>
+            <Link to="/profile">Profile</Link>
+          </li>
         </ul>
+
+          <Route exact path="/" component={Home} />
+          <Route path="/draft" component={DraftDisplay} />
+          <Route path="/history" component={HistoryDisplay} />
+          <Route path="/profile" component={ProfileDisplay} />
         </nav>
       </div>
+      </Router>
     )
   }
 }
