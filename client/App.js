@@ -6,6 +6,7 @@ import HistoryDisplay from './components/categories/history';
 import ProfileDisplay from './components/categories/profile';
 import NavBar from './components/categories/navbar';
 import './styles/main.scss';
+
 import { BrowserRouter, Route } from 'react-router-dom';
 
 
@@ -17,7 +18,10 @@ class App extends React.Component {
         return (
           <div>
             <NavBar />
-            {this.props.children}
+            <Route path="/home" component={HomeDisplay} />
+            <Route path="/draft" component={DraftDisplay} />
+            <Route path="/history" component={HistoryDisplay} />
+            <Route path="/profile" component={ProfileDisplay} />
           </div>
         )
     }
@@ -25,7 +29,6 @@ class App extends React.Component {
 ReactDom.render((
     <BrowserRouter>
         <Route path="/" component={App}>
-            <Route path="/home" component={HomeDisplay} />
         </Route>
     </BrowserRouter>
 ), document.getElementById('app'));
