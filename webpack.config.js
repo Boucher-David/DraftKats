@@ -5,7 +5,7 @@ require('dotenv').config();
 
 
 module.exports = {
-    entry: './client/App.js',
+    entry: './client/Main.js',
     output: {
         // Webpack prefers an absolute path:
         path: path.resolve(__dirname, './bundle/'),
