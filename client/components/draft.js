@@ -8,7 +8,7 @@ class DraftDisplay extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="component">
         <h2>This is from the Draft Component</h2>
       </div>
     )

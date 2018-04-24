@@ -7,7 +7,7 @@ class HomeDisplay extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="component">
         <h2>This is from the Home Component</h2>
       </div>
     )

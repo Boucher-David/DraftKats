@@ -1,19 +1,24 @@
 import React from 'react';
-import { Link } from "react-router-dom";
+
 
 class NavBar extends React.Component {
   constructor(props) {
     super(props);
   }
 
+  toggleComponent = (e) => {
+    this.props.toggle(e.target.id);
+  }
+
+
   render() {
     return (
         <nav>
-        <ul>
-          <li><Link to="/">Home</Link></li>
-          <li><Link to="/draft">Draft</Link></li>
-          <li><Link to="/history">History</Link></li>
-          <li><Link to="/profile">Profile</Link></li>
+        <ul onClick={this.toggleComponent}>
+          <li id="home">Home</li>
+          <li id="draft">Draft</li>
+          <li id="profile">Profile</li>
+          <li id="history">History</li>
         </ul>
         </nav>
     )

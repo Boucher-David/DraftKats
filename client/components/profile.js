@@ -7,7 +7,7 @@ class ProfileDisplay extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="component">
         <h2>This is from the Profile Component</h2>
       </div>
     )

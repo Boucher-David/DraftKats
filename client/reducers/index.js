@@ -1,7 +1,7 @@
 import {combineReducers} from 'redux';
 
- import home from './home.js';
+ import display from './display.js';
 
 export default combineReducers({
-  home
+  display
 });
