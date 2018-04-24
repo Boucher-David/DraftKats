@@ -7,7 +7,7 @@ class NavBar extends React.Component {
   }
 
   toggleComponent = (e) => {
-    this.props.toggle(e.target.id);
+    return (e.target.id === '') ? null : this.props.toggle(e.target.id);
   }
 
 
