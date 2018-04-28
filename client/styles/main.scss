@@ -15,15 +15,13 @@ nav {
     padding: .5em 1em;
     min-width:75px;
     a {
-      color: #000;
+      color:white;
       text-decoration: none;
     }
 
     &:hover {
       background: #000;
-      a {
-        color: #fff;
-      }
+      color: white;
     }
   }
 
@@ -134,4 +132,8 @@ nav {
 
 }
 
+}
+
+.component {
+  display: inline-block;
 }

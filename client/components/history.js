@@ -7,7 +7,7 @@ class HistoryDisplay extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="component">
         <h2>This is from the History Component</h2>
       </div>
     )
