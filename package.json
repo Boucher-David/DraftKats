@@ -8,7 +8,7 @@
     "dev-backend": "NODE_ENV=development nodemon ./index.js",
     "dev-frontend": "NODE_ENV=development  webpack-dev-server --content-base bundle/",
     "dev-db": "mkdir -p ./server/db && mongod --dbpath ./server/db",
-    "dev-test": "NODE_ENV=development jest --runInBand",
+    "dev-test": "NODE_ENV=development jest --watch",
     "prod-test": "NODE_ENV=production jest --runInBand"
   },
   "repository": {
