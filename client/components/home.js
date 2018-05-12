@@ -16,6 +16,7 @@ class HomeDisplay extends React.Component {
       <div className="component">
         <h2>This is from the Home Component</h2>
         <Dropdown options={this.props.sportPD} onChange={this.toggleSport} />
+        <Dropdown options={this.numberTeamsToggle} />
       </div>
     )
   }
