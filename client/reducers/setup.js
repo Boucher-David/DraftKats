@@ -4,7 +4,10 @@ let displaySport = {
   properfootball: false,
   hockey: false,
   positions: [],
-  sports: ['Baseball', 'Football', 'Soccer', 'Hockey'] //change later
+  sports: ['Baseball', 'Football', 'Soccer', 'Hockey'],
+  selected: null,
+  teams: {},
+  draftPosition: null
 }
 
 let positions = {
@@ -14,31 +17,29 @@ let positions = {
   Hockey: {'G': 1, 'FW': 3, 'DF': 3}
 };
 
+
+
 export default (state=displaySport, action) => {
+    let newState = {
+      ...state
+    }
+    let {type, payload} = action;
 
-  let {type, payload} = action;
+    switch(type) {
+        case 'SPORT':
+          newState.positions=[];
+          newState.positions.push(positions[payload]);
+          newState.selected = payload;
 
-        switch(type) {
-            case 'SPORT':
+          return newState;
+          break;
 
-            let newState = {
-                ...state
-            }
-            newState.positions=[];
-            newState.positions.push(positions[payload]);
+        case 'NUMBEROFTEAMS':
 
+          return newState;
+          break;
 
-            return newState;
-            break;
-            case 'NUMBEROFTEAMS':
-
-            let newState = {
-              ...state
-            }
-
-            return newState;
-            break;
-            default:
-                return state;
-        }
+        default:
+          return state;
+    }
 }
