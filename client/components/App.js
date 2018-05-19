@@ -20,7 +20,7 @@ class App extends React.Component {
       return (
           <div>
             <NavBar toggle={this.props.toggleDisplay}/>
-            {(this.props.state.display.home) ? <HomeDisplay sportPD={this.props.state.setup.sports} toggleSport={this.props.toggleSport toggleNumberTeams={this.props.numberTeamsToggle}}/> : null}
+            {(this.props.state.display.home) ? <HomeDisplay sportPD={this.props.state.setup.sports} toggleSport={this.props.toggleSport} toggleNumberTeams={this.props.numberTeamsToggle}/> : null}
             {(this.props.state.display.profile) ? <ProfileDisplay /> : null}
             {(this.props.state.display.history) ? <HistoryDisplay /> : null}
             {(this.props.state.display.draft) ? <DraftDisplay /> : null}

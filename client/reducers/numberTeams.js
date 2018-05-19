@@ -7,10 +7,10 @@ let displayNumberOfTeams = {
 
 export default (state=displayNumberOfTeams, action) => {
   console.log(action);
-  let bbNumbers = {'Team 1', 'Team 2'};
+  let bbNumbers = {'Team 1': 1, 'Team 2': 2};
   // state.baseball=true;
   state.numberTeams=[];
-  state.positions.push(bbPositions);
+  // state.positions.push(bbPositions);
   let fbPositions = {'QB': 1, 'WR': 3, 'DEF': 1};
 
   return state;

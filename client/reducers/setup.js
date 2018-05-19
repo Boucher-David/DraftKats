@@ -7,13 +7,38 @@ let displaySport = {
   sports: ['Baseball', 'Football', 'Soccer', 'Hockey'] //change later
 }
 
-export default (state=displaySport, action) => {
-  console.log(action);
-  let bbPositions = {'P': 1, 'SS': 1, 'OF': 3};
-  // state.baseball=true;
-  state.positions=[];
-  state.positions.push(bbPositions);
-  let fbPositions = {'QB': 1, 'WR': 3, 'DEF': 1};
+let positions = {
+  Baseball: {'P': 1, 'SS': 1, 'OF': 3},
+  Football: {'QB': 1, 'WR': 3, 'DEF': 1},
+  Soccer: {'G': 1, 'FW': 3, 'DF': 3},
+  Hockey: {'G': 1, 'FW': 3, 'DF': 3}
+};
 
-  return state;
+export default (state=displaySport, action) => {
+
+  let {type, payload} = action;
+
+        switch(type) {
+            case 'SPORT':
+
+            let newState = {
+                ...state
+            }
+            newState.positions=[];
+            newState.positions.push(positions[payload]);
+
+
+            return newState;
+            break;
+            case 'NUMBEROFTEAMS':
+
+            let newState = {
+              ...state
+            }
+
+            return newState;
+            break;
+            default:
+                return state;
+        }
 }
