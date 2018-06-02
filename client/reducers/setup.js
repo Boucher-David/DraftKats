@@ -7,7 +7,8 @@ let displaySport = {
   sports: ['Baseball', 'Football', 'Soccer', 'Hockey'],
   selected: null,
   teams: {},
-  draftPosition: null
+  draftPosition: null,
+  numTeams: null
 }
 
 let positions = {
@@ -30,12 +31,14 @@ export default (state=displaySport, action) => {
           newState.positions=[];
           newState.positions.push(positions[payload]);
           newState.selected = payload;
+          console.log(newState);
 
           return newState;
           break;
 
         case 'NUMBEROFTEAMS':
-
+          newState.numTeams = null;
+          newState.numTeams = payload.toString();
           return newState;
           break;
 

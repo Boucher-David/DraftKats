@@ -10,6 +10,7 @@ import NavBar from './navbar';
 
 import {toggle} from '../actions/toggle';
 import {sportToggle} from '../actions/setup';
+import {numberTeamsToggle} from '../actions/numberTeams';
 
 class App extends React.Component {
   constructor(props) {
@@ -19,7 +20,7 @@ class App extends React.Component {
       return (
           <div>
             <NavBar toggle={this.props.toggleDisplay}/>
-            {(this.props.state.display.home) ? <HomeDisplay setup={this.props.state.setup} toggleSport={this.props.toggleSport} toggleNumberTeams={this.props.numberTeamsToggle}/> : null}
+            {(this.props.state.display.home) ? <HomeDisplay setup={this.props.state.setup} toggleSport={this.props.toggleSport} toggleNumberTeams={this.props.toggleNumberTeams}/> : null}
             {(this.props.state.display.profile) ? <ProfileDisplay /> : null}
             {(this.props.state.display.history) ? <HistoryDisplay /> : null}
             {(this.props.state.display.draft) ? <DraftDisplay /> : null}
