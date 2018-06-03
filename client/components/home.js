@@ -15,7 +15,12 @@ class HomeDisplay extends React.Component {
     this.props.toggleNumberTeams(e.value)
   };
 
-  componentDidUpdate() {console.log(this.props.setup.numTeams)};
+  toggleDraftPosition = (e) => {
+    this.props.toggleDraftPosition(e.value)
+  }
+
+  // componentDidUpdate() {console.log(this.props.setup.numTeams)};
+  componentDidUpdate() {console.log(this.props.setup.draftPosition)};
   // To Do:
 
   // Need to connect the numberTeams action to the dropdown, and pass the selected number into state. Same way as the first one. Another for draft position (with the option to randomize).
@@ -27,6 +32,7 @@ class HomeDisplay extends React.Component {
         <h2>This is from the Home Component</h2>
         <Dropdown options={this.props.setup.sports} onChange={this.toggleSport} value={this.props.setup.selected} placeholder="Select a Sport"/>
         <Dropdown options={[1,2,3,4,5,6,7,8,9,10]} onChange={this.toggleNumberofTeams} value={this.props.setup.numTeams} placeholder="League Teams"/>
+        <Dropdown options={[1,2,3,4,5,6,7,8,9,10]} onChange={this.toggleDraftPosition} value={this.props.setup.draftPosition} placeholder="Draft Position"/>
       </div>
     )
   }

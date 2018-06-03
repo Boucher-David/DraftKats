@@ -31,7 +31,7 @@ export default (state=displaySport, action) => {
           newState.positions=[];
           newState.positions.push(positions[payload]);
           newState.selected = payload;
-          console.log(newState);
+          console.log('Hey Larry:', positions[payload]);
 
           return newState;
           break;
@@ -39,6 +39,12 @@ export default (state=displaySport, action) => {
         case 'NUMBEROFTEAMS':
           newState.numTeams = null;
           newState.numTeams = payload.toString();
+          return newState;
+          break;
+
+        case 'DRAFTPOSITION':
+          newState.draftPosition = null;
+          newState.draftPosition = payload.toString();
           return newState;
           break;
 
