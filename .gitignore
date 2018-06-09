@@ -1,6 +1,6 @@
 *.jpg
+/bundle/bundle.js
 node_modules
-bundle
 .env.*.php
 .env.php
 .env
