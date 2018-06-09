@@ -1,10 +1,11 @@
 // stock scss file
+
+
 @media screen and (min-width: 600px) {
 nav {
 
   background: #ccc;
   height:2em;
-  position:fixed;
   top:0;
   left:0;
   width:100%;
@@ -132,8 +133,4 @@ nav {
 
 }
 
-}
-
-.component {
-  display: inline-block;
 }

@@ -1,8 +1,7 @@
+*.jpg
 node_modules
+bundle
 .env.*.php
 .env.php
 .env
 server/db
-Draft Component.jpg
-History Component.jpg
-Home Component.jpg
