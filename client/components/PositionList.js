@@ -1,5 +1,4 @@
 import React from 'react';
-import Dropdown from 'react-dropdown';
 import Dropdown_DK from './Dropdown';
 
 class PositionList extends React.Component {
