@@ -1,6 +1,7 @@
 import React from 'react';
 import Dropdown from 'react-dropdown';
 import PositionList from './PositionList';
+import Dropdown_DK from './Dropdown';
 
 class HomeDisplay extends React.Component {
   constructor(props) {
@@ -23,15 +24,21 @@ class HomeDisplay extends React.Component {
     this.props.toggleDraftPosition(Math.floor(Math.random() * (this.props.setup.numTeams)) + 1);
   };
 
-  // To Do:
-
-  // Need to connect the numberTeams action to the dropdown, and pass the selected number into state. Same way as the first one. Another for draft position (with the option to randomize).
-  // Selecting a sport should render a bunch of dropdowns for each position in the sport. This should be dynamic.
+  test = (w) => {
+    console.log('log from home', w);
+  }
 
   render() {
     return (
       <div className="component">
         <div className="setup-draft">
+        <Dropdown_DK 
+          title="Testing title"
+          options={[1,2,3]}
+          clickHandler={this.test}
+          initialValue={5}
+        />
+
         <Dropdown 
           options={this.props.setup.sports} 
           onChange={this.toggleSport} 
