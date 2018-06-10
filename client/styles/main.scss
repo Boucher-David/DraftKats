@@ -1,4 +1,7 @@
 // stock scss file
+.dropdown {
+  width: 175px;
+}
 
 .dropbtn {
   background-color: #4CAF50;
@@ -7,6 +10,7 @@
   font-size: 16px;
   border: none;
   cursor: pointer;
+  width: 175px;
 }
 
 .dropdown .dropbtn {
@@ -21,6 +25,7 @@
   min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
+  width: 175px;
 }
 
 .dropdown-content div {

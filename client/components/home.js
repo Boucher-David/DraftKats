@@ -9,55 +9,48 @@ class HomeDisplay extends React.Component {
   }
 
   toggleSport = (e) => {
-    this.props.toggleSport(e.value)
+    this.props.toggleSport(e)
   };
 
   toggleNumberofTeams = (e) => {
-    this.props.toggleNumberTeams(e.value)
+    this.props.toggleNumberTeams(e)
+    this.props.toggleDraftPosition(e);
   };
 
   toggleDraftPosition = (e) => {
-    this.props.toggleDraftPosition(e.value)
+    this.props.toggleDraftPosition(e)
   };
 
   getRandomDraftPosition = () => {
     this.props.toggleDraftPosition(Math.floor(Math.random() * (this.props.setup.numTeams)) + 1);
   };
 
-  test = (w) => {
-    console.log('log from home', w);
-  }
-
   render() {
     return (
       <div className="component">
         <div className="setup-draft">
         <Dropdown_DK 
-          title="Testing title"
-          options={[1,2,3]}
-          clickHandler={this.test}
-          initialValue={5}
+          title="Sport:"
+          options={this.props.setup.sports}
+          clickHandler={this.toggleSport}
+          initialValue={this.props.setup.selected}
         />
 
-        <Dropdown 
-          options={this.props.setup.sports} 
-          onChange={this.toggleSport} 
-          value={this.props.setup.selected} 
-          placeholder="Select a Sport"
+        <Dropdown_DK 
+          title="# of Teams:"
+          options={[1,2,3,4,5,6,7,8,9,10]}
+          clickHandler={this.toggleNumberofTeams}
+          initialValue={this.props.setup.numTeams}
         />
-        <Dropdown 
-          options={[1,2,3,4,5,6,7,8,9,10]} 
-          onChange={this.toggleNumberofTeams} 
-          value={this.props.setup.numTeams} 
-          placeholder="League Teams"
+
+        <Dropdown_DK 
+          title="Draft Position:"
+          options={Array.apply(null, new Array((Number(this.props.setup.numTeams)))).map(function(_,i) { return i + 1; })}
+          clickHandler={this.toggleDraftPosition}
+          initialValue={this.props.setup.draftPosition}
         />
-        <Dropdown
-          options={Array.apply(null, new Array((Number(this.props.setup.numTeams)))).map(function(_,i) { return i + 1; })} 
-          onChange={this.toggleDraftPosition}
-          value={this.props.setup.draftPosition} 
-          placeholder="Draft Position"
-         />
-         {(this.props.setup.numTeams) ? <button onClick={this.toggleDraftPosition}>Randomize</button> : null}
+
+         {(this.props.setup.numTeams) ? <button onClick={this.getRandomDraftPosition}>Randomize</button> : null}
         </div>
         <div className="setup-positions">
           <PositionList updatePosition={this.props.positionUpdate} positions={this.props.setup.positions}/>
