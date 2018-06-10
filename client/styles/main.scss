@@ -1,10 +1,56 @@
 // stock scss file
+.dropdown {
+  width: 175px;
+}
+
+.dropbtn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  width: 175px;
+}
+
+.dropdown .dropbtn {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  width: 175px;
+}
+
+.dropdown-content div {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content div:hover {background-color: #f1f1f1}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown:hover .dropbtn {
+  background-color: #3e8e41;
+}
+
+
 @media screen and (min-width: 600px) {
 nav {
 
   background: #ccc;
   height:2em;
-  position:fixed;
   top:0;
   left:0;
   width:100%;
@@ -132,8 +178,4 @@ nav {
 
 }
 
-}
-
-.component {
-  display: inline-block;
 }
